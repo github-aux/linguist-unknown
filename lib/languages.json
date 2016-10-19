@@ -56,6 +56,9 @@
       "type":"type of test",
       "link":"https://github.com/test/test",
       "main_color":"#FF8272",
+      "single_line_comment": "//",
+      "begin_multiline_comment": "/*",
+      "end_multiline_comment": "*/",
       "grammar":[
          {
             "color":"#72EEBB",

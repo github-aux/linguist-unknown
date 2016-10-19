@@ -1,3 +1,5 @@
+// single comment
+
 let jaca = 1
 for jaca - 1 ... 2 {
   if jaca == 0 {
@@ -6,3 +8,11 @@ for jaca - 1 ... 2 {
     break
   }
 }
+
+/* multiline comment
+ *
+ * if jaca {
+ *  print(dope)
+ * } 
+ *
+ */
