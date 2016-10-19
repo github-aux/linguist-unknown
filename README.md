@@ -8,7 +8,7 @@ This repository is used as a Web Browser extension for the website GitHub.com in
 See  [`CONTRIBUTING.md`](/CONTRIBUTING.md) before creating a pull request.
 
 ### Why should you use it?
-Having your programming language listed/highlighted by GitHub is not always as easy when your programming language has not largely been used.
+Having your programming language listed/highlighted by GitHub is not always as easy when your programming language has not been largely used.
 
 ## Contributing
 Please check out our [contributing guidelines](CONTRIBUTING.md).
