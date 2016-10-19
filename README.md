@@ -1,3 +1,7 @@
+<p align="center">
+	<img alt="Brain Logo" src="./img/linguist-unknown.png" width="100" />
+</p>
+
 # Linguist Unknown
 This repository is used as a Web Browser extension for the website GitHub.com in order to detect unknown, lost or new programming languages.
 
