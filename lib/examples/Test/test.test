@@ -1,0 +1,8 @@
+let jaca = 1
+for jaca - 1 ... 2 {
+  if jaca == 0 {
+    continue
+  } else {
+    break
+  }
+}
