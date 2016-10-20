@@ -30,6 +30,21 @@ function Utilities() {
             });
         });
     };
+   
+    this.getLanguageDetails = function(url, ext, callback) {
+        var jsonHelper = new JsonHelper();
+        jsonHelper.load(url, function(objs){
+            objs.every(function(objLang){
+                if (objLang.language.valueOf() == ext.language.valueOf()) {
+                    // add extensions to the object just in case
+                    objLang.extensions = ext.extensions;
+                    callback(objLang);
+                    // that will break the "loop"
+                    return false;
+                }
+            });
+        });
+    };
 }
 
 chrome.storage.sync.get("shouldWork", function(items) {
@@ -44,7 +59,9 @@ chrome.storage.sync.get("shouldWork", function(items) {
                    jsonHelper.load(url_ext, function(objs){
                        var util = new Utilities();
                        util.tryMatchUrlExtension(current_url, objs, function(obj){
-                           callJaca(); 
+                           util.getLanguageDetails(url_lang, obj, function(langObj){
+                               new Highlighter(langObj).draw(); 
+                           });
                        }); 
                    });
                }, 100);
