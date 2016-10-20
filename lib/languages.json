@@ -1,17 +1,6 @@
 [
    {
       "language":"Brain",
-      "extensions":[
-         {
-            "extension":".b"
-         },
-         {
-            "extension":".br"
-         },
-         {
-            "extension":".brain"
-         }
-      ],
       "type":"esoteric",
       "link":"https://github.com/brain-labs/brain",
       "main_color":"#000000",
@@ -48,11 +37,6 @@
    },
    {
       "language":"Test",
-      "extensions":[
-         {
-            "extension":".test"
-         }
-      ],
       "type":"type of test",
       "link":"https://github.com/test/test",
       "main_color":"#FF8272",

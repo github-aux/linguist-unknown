@@ -1,0 +1,24 @@
+[
+   {
+      "language":"Brain",
+      "extensions":[
+         {
+            "extension":".b"
+         },
+         {
+            "extension":".br"
+         },
+         {
+            "extension":".brain"
+         }
+      ]
+   },
+   {
+      "language":"Test",
+      "extensions":[
+         {
+            "extension":".test"
+         }
+      ]
+   }
+]
