@@ -38,7 +38,28 @@
                   "operator":"}"
                }
             ]
+         },
+         {
+            "color":"#0000FF",
+            "operators":[
+               {
+                  "operator":"+"
+               },
+               {
+                  "operator":"-"
+               },
+               {
+                  "operator":"*"
+               },
+               {
+                  "operator":"/"
+               },
+               {
+                  "operator":"%"
+               }
+            ]
          }
+
       ]
    },
    {
