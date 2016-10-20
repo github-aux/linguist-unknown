@@ -3,33 +3,39 @@
       "language":"Brain",
       "type":"esoteric",
       "link":"https://github.com/brain-labs/brain",
-      "main_color":"#000000",
+      "default_color":"#969896",
       "grammar":[
          {
             "color":"#00FF00",
-            "keywords":[
+            "operators":[
                {
-                  "keyword":">"
+                  "operator":">"
                },
                {
-                  "keyword":"<"
+                  "operator":"<"
+               },
+               {
+                  "operator":"&lt;"
+               },
+               {
+                  "operator":"&gt;"
                }
             ]
          },
          {
             "color":"#FF0000",
-            "keywords":[
+            "operators":[
                {
-                  "keyword":"["
+                  "operator":"["
                },
                {
-                  "keyword":"]"
+                  "operator":"]"
                },
                {
-                  "keyword":"{"
+                  "operator":"{"
                },
                {
-                  "keyword":"}"
+                  "operator":"}"
                }
             ]
          }
@@ -39,7 +45,8 @@
       "language":"Test",
       "type":"type of test",
       "link":"https://github.com/test/test",
-      "main_color":"#FF8272",
+      "default_color":"#FF8272",
+      "comment_color":"#969896",
       "single_line_comment": "//",
       "begin_multiline_comment": "/*",
       "end_multiline_comment": "*/",
