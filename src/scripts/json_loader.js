@@ -42,6 +42,8 @@ function Utilities() {
                     // that will break the "loop"
                     return false;
                 }
+                
+                return true;
             });
         });
     };

@@ -28,22 +28,23 @@ function Highlighter(langObj) {
             } else if (this.isNumber) {
             } else {*/
                 this.langObj.grammar.every(function(obj){
-                    console.log(obj);
                     if (obj.operators !== undefined) {
-                        console.log(uhu);
                         var found = false;
-                        obj.operators.every(function(ObjOperator){
+                        obj.operators.every(function(objOperator){
                             if (code.substring(i, code.length).startsWith(objOperator.operator)) {
-                                var begin_color = '<pre style="color:'+ objOperator.color+ '">';
+                                var begin_color = '<span style="color:'+ obj.color+ ';">';
                                 code = [code.slice(0, i), begin_color, code.slice(i)].join('');
-                                i += objOperator.operator.length + color.length;
-                                var end_color = "</pre>";
+                                i += objOperator.operator.length + begin_color.length;
+                                var end_color = "</span>";
                                 code = [code.slice(0, i), end_color, code.slice(i)].join('');
                                 i += end_color.length;
+                                i--; // that will be incremented at the end
                                 found = true;
                                 // break the callback
                                 return false;
                             }
+
+                            return true;
                         });
 
                         if (found) {
@@ -51,6 +52,8 @@ function Highlighter(langObj) {
                             return false;
                         }
                     }
+
+                    return true;
                 });
            /* } */
            i++;
