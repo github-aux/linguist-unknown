@@ -1,6 +1,6 @@
-chrome.storage.sync.get("shouldWork", function(items) {
-  if (items.shouldWork) {
+
+function callJaca() {
     document.getElementsByClassName("header-nav")[0].innerHTML += "test";
-  }
-});
+}
+
 

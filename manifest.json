@@ -23,9 +23,10 @@
                   "http://github.com/*",
                   "https://github.com/*"],
       "css": ["./src/css/linguist_style.css"],
-      "js": ["./src/scripts/json_loader.js",
-             "./src/scripts/highlighter.js"],
+      "js": ["./src/scripts/highlighter.js",
+             "./src/scripts/json_loader.js"],
       "run_at": "document_end"
     }
   ]
 }
+
