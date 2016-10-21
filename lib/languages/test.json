@@ -1,0 +1,40 @@
+{
+   "language":"Test",
+   "type":"type of test",
+   "link":"https://github.com/test/test",
+   "default_color":"#FF8272",
+   "comment_color":"#969896",
+   "single_line_comment":"//",
+   "begin_multiline_comment":"/*",
+   "end_multiline_comment":"*/",
+   "grammar":[
+      {
+         "color":"#72EEBB",
+         "keywords":[
+            {
+               "keyword":"for"
+            },
+            {
+               "keyword":"while"
+            }
+         ]
+      },
+      {
+         "color":"#FF00FF",
+         "keywords":[
+            {
+               "keyword":"if"
+            },
+            {
+               "keyword":"else"
+            },
+            {
+               "keyword":"switch"
+            },
+            {
+               "keyword":"let"
+            }
+         ]
+      }
+   ]
+}
