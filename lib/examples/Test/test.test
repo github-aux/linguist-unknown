@@ -9,6 +9,8 @@ for jaca - 1 ... 2 {
   }
 }
 
+if jaca ~= &/\w+/
+
 let jaca2 = "hi brous 'jaca' hahaha"
 let jaca3 = 'ihuuu'
 let n = 2.500

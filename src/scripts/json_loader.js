@@ -22,12 +22,19 @@ function JsonHelper() {
 
 function Utilities() {
     this.tryMatchUrlExtension = function(url, exts, successCallback) {
-        exts.forEach(function(lang){
-            lang.extensions.forEach(function(obj) {
+        exts.every(function(lang){
+            var still_looking_for = true;
+            lang.extensions.every(function(obj) {
                 if (url.endsWith(obj.extension)) {
                    successCallback(lang);
+                   still_looking_for = false;
+                   return false;
                 }
+
+                return true;
             });
+
+            return still_looking_for;
         });
     };
 
