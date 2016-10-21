@@ -9,10 +9,14 @@ for jaca - 1 ... 2 {
   }
 }
 
+let jaca2 = "hi brous 'jaca' hahaha"
+let jaca3 = 'ihuuu'
+let n = 2.500
+
 /* multiline comment
  *
  * if jaca {
  *  print(dope)
- * } 
+ * }
  *
  */
