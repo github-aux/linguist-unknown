@@ -8,6 +8,7 @@ function Token(value, pos, size, color) {
 
 function Highlighter(langObj) {
     this.langObj = langObj;
+    this.isMultilineComment = false;
 
     this.draw = function() {
         var table = document.getElementsByClassName("blob-wrapper")[0].getElementsByTagName("table")[0];
@@ -34,11 +35,16 @@ function Highlighter(langObj) {
         return char == "\"" || char == "'";
     };
 
+    this.startsWith = function(lexeme, code, idx) {
+        return lexeme !== undefined &&
+               code.substring(idx, code.length).startsWith(lexeme);
+    };
+
     this.getId = function(code, idx, callback) {
         var pos_id = idx;
         var id = code[idx];
         idx++;
-        while(idx < code.length && this.isId(code[idx])) {
+        while(idx < code.length && this.isId(code[idx], false)) {
             id += code[idx];
             idx++;
         }
@@ -58,16 +64,66 @@ function Highlighter(langObj) {
         do {
             idx++;
             str += code[idx];
-        } while(idx < code.length && code[idx] != code[pos_str]);
+        } while (idx < code.length && code[idx] != code[pos_str]);
 
         callback(str, pos_str, this.langObj);
+    };
+
+    this.getMultilineComment = function(endLexeme, code, idx, callback) {
+        var pos_comment = idx;
+        var stillLookingFor = true;
+        var comment = "";
+        while(idx < code.length &&
+              !code.substring(idx, code.length).startsWith(endLexeme)) {
+            comment += code[idx];
+            idx++;
+        }
+
+        if (idx < code.length) {
+          comment += endLexeme;
+          stillLookingFor = false;
+        }
+
+        callback(comment, pos_comment, stillLookingFor, this);
     };
 
     this.lexer = function(code) {
         var tokens = Array();
         var i = 0;
         while (i < code.length) {
-            if (this.isId(code[i], true)) {
+            if (this.isMultilineComment ||
+                this.startsWith(this.langObj.begin_multiline_comment,
+                    code,
+                    i)) {
+                this.isMultilineComment = true;
+                this.getMultilineComment(
+                    this.langObj.end_multiline_comment,
+                    code,
+                    i,
+                    function(mult_comment, pos, lookingFor, highlighter){
+                        highlighter.isMultilineComment = lookingFor;
+                        var color_comment = highlighter.langObj.default_color;
+                        if (highlighter.langObj.comment_color !== undefined) {
+                            color_comment = highlighter.langObj.comment_color;
+                        }
+
+                        tokens.push(new Token(mult_comment,
+                            pos, mult_comment.length, color_comment));
+                        i += mult_comment.length;
+                });
+
+            } else if (this.startsWith(this.langObj.single_line_comment,
+                code,
+                i)) {
+                var comment = code.substring(i, code.length);
+                var color_comment = this.langObj.default_color;
+                if (this.langObj.comment_color !== undefined) {
+                    color_comment = this.langObj.comment_color;
+                }
+
+                tokens.push(new Token(comment, i, comment.length, color_comment));
+                i += comment.length;
+            } else if (this.isId(code[i], true)) {
                 this.getId(code, i, function(id, pos, langObj){
                     var color_id = langObj.default_color;
                     langObj.grammar.every(function(keys) {
@@ -108,7 +164,10 @@ function Highlighter(langObj) {
                         color_number = langObj.number_color;
                     }
 
-                    tokens.push(new Token(number, pos, number.length, color_number));
+                    tokens.push(new Token(number,
+                        pos,
+                        number.length,
+                        color_number));
                     i += number.length;
                 });
             } else {
