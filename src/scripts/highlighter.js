@@ -19,8 +19,11 @@ function Highlighter(langObj) {
         }
     };
 
-    this.isLetter = function(char) {
-        return (char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z');
+    this.isId = function(char, beginningId) {
+        return (char >= 'a' && char <= 'z') ||
+               (char >= 'A' && char <= 'Z') ||
+               (char == '_') ||
+               (!beginningId && this.isNumber(char));
     };
 
     this.isNumber = function(char) {
@@ -31,49 +34,86 @@ function Highlighter(langObj) {
         return char == "\"" || char == "'";
     };
 
+    this.getId = function(code, idx, callback) {
+        var pos_id = idx;
+        var id = code[idx];
+        idx++;
+        while(idx < code.length && this.isId(code[idx])) {
+            id += code[idx];
+            idx++;
+        }
+
+        callback(id, pos_id, this.langObj);
+    };
+
+    this.getNumber = function(code, idx, callback) {
+        var number = code.substring(idx, code.length)
+                         .match(new RegExp("[-+]?[0-9]*\.?[0-9]"))[0];
+        callback(number, idx, this.langObj);
+    };
+
     this.getLiteralString = function(code, idx, callback) {
         var pos_str = idx;
         var str = code[idx];
         do {
             idx++;
             str += code[idx];
-        } while(idx < code.length && !code[pos_str]);
+        } while(idx < code.length && code[idx] != code[pos_str]);
 
-        callback(str, pos_str);
+        callback(str, pos_str, this.langObj);
     };
 
     this.lexer = function(code) {
         var tokens = Array();
         var i = 0;
         while (i < code.length) {
-            if (this.isLetter(code[i])) {
-                //var id
+            if (this.isId(code[i], true)) {
+                this.getId(code, i, function(id, pos, langObj){
+                    var color_id = langObj.default_color;
+                    langObj.grammar.every(function(keys) {
+                        var not_found = true;
+                        if (keys.keywords !== undefined) {
+                            keys.keywords.every(function(keyObj) {
+                                if (keyObj.keyword.valueOf() == id.valueOf()) {
+                                    color_id = keys.color;
+                                    not_found = false;
+                                    return false;
+                                }
+
+                                return true;
+                            });
+                        }
+
+                        // false stops the "loop"
+                        return not_found;
+                    });
+
+                    tokens.push(new Token(id, pos, id.length, color_id));
+                    i += id.length;
+                });
             } else if (this.isLiteralString(code[i])){
-                this.getLiteralString(code, i, function(str, pos){
-                    var color_string = this.langObj.default_color;
-                    if (this.langObj.string_color !== undefined) {
-                        color_string = this.langObj.string_color;
+                this.getLiteralString(code, i, function(str, pos, langObj){
+                    var color_string = langObj.default_color;
+                    if (langObj.string_color !== undefined) {
+                        color_string = langObj.string_color;
                     }
-                    
-                    tokens.push(new Token(str, pos_str, str.length, string_color));
+
+                    tokens.push(new Token(str, pos, str.length, color_string));
                     i += str.length;
-                    i--;
                 });
             } else if (this.isNumber(code[i])) {
-                var number = code.substring(i, code.length)
-                                 .match(new RegExp("[-+]?[0-9]*\.?[0-9]"))[0];
-                var colorNumber = this.langObj.default_color;
-                if (this.langObj.number_color !== undefined) {
-                    colorNumber = this.langObj.number_color;
-                }
+                this.getNumber(code, i, function(number, pos, langObj){
+                    var color_number = langObj.default_color;
+                    if (langObj.number_color !== undefined) {
+                        color_number = langObj.number_color;
+                    }
 
-                tokens.push(new Token(number, i, number.length, colorNumber));
-                i += number.length;
-                i--;
+                    tokens.push(new Token(number, pos, number.length, color_number));
+                    i += number.length;
+                });
             } else {
-
+              i++;
             }
-            i++;
         }
 
         return code;
