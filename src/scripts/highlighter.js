@@ -15,7 +15,8 @@ function Highlighter(langObj) {
         var cells = table.querySelectorAll('tbody td');
         for (var i = 0, cell; cell = cells[i]; i++) {
             if (cell.id.indexOf("LC") !== -1) {
-                cell.innerHTML = this.lexer(cell.innerHTML);
+                var tokens = this.lexer(cell.innerHTML);
+                console.log(tokens);
             }
         }
     };
@@ -171,11 +172,13 @@ function Highlighter(langObj) {
                     i += number.length;
                 });
             } else {
+              // we don't have any grammar for this object,
+              // so we ignore it and go to the next one
               i++;
             }
         }
 
-        return code;
+        return tokens;
     };
 }
 
