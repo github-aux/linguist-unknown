@@ -9,7 +9,7 @@ for jaca - 1 ... 2 {
   }
 }
 
-if jaca ~= &/\w+/
+if jaca ~= &/\w+/i
 
 let jaca2 = "hi brous 'jaca' hahaha"
 let jaca3 = 'ihuuu'

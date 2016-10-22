@@ -30,7 +30,7 @@ function Highlighter(langObj) {
     };
 
     this.isNumber = function(char) {
-        return (char >= '0' && char <= '9') || char == '.';
+        return (char >= '0' && char <= '9');
     };
 
     this.isLiteralString = function(char) {
@@ -42,13 +42,17 @@ function Highlighter(langObj) {
                code.substring(idx, code.length).startsWith(lexeme);
     };
 
-    this.matchRegex = function(regex, code, idx) {
-        var modifier = regex.substring(regex.lastIndexOf("/") + 1, regex.length);
-        var real_regex = "^" + regex.substring(0, regex.lastIndexOf("/"));
-        var regex_obj = new RegExp(real_regex, modifier);
+    this.matchRegex = function(regex, modifier, code, idx) {
+        if (!regex.startsWith("^")) {
+          regex = "^" + regex;
+        }
 
-        return regex_obj !== null &&
-               code.substring(idx, code.length).match(regex_obj);
+        if (modifier === undefined) {
+            modifier = "";
+        }
+
+        var regex_obj = new RegExp(regex, modifier);
+        return code.substring(idx, code.length).match(regex_obj);
     };
 
     this.getId = function(code, idx, callback) {
@@ -65,7 +69,7 @@ function Highlighter(langObj) {
 
     this.getNumber = function(code, idx, callback) {
         var number = code.substring(idx, code.length)
-                         .match(new RegExp("[-+]?[0-9]*\.?[0-9]"))[0];
+                         .match(new RegExp("^[-+]?[0-9]*\.?[0-9]+"))[0];
         callback(number, idx, this.langObj);
     };
 
@@ -102,7 +106,11 @@ function Highlighter(langObj) {
         var tokens = Array();
         var i = 0;
         while (i < code.length) {
-            if (this.isMultilineComment ||
+            if (code[i] == ' ' || code[i] == '\t' || code[i] == '\n'){
+                i++;
+                continue;
+            }
+            else if (this.isMultilineComment ||
                 this.startsWith(this.langObj.begin_multiline_comment,
                     code,
                     i)) {
@@ -182,46 +190,57 @@ function Highlighter(langObj) {
                     i += number.length;
                 });
             } else {
-              var still_looking_for = true;
-              // check if it is operator or match any regex
-              this.langObj.grammar.every(function(obj){
-                  if (obj.operators !== undefined) {
-                      obj.operators.every(function(operatorObj){
-                          if (this.startsWith(operatorObj.operator,
+                var still_looking_for = true;
+                var highlighter = this;
+                // check if it is operator or match any regex
+                this.langObj.grammar.every(function(obj){
+                    if (obj.operators !== undefined) {
+                        obj.operators.every(function(operatorObj){
+                            if (this.startsWith(operatorObj.operator,
+                                code,
+                                i)) {
+                                tokens.push(new Token(operatorObj.operator,
+                                    i,
+                                    operatorObj.operator.length,
+                                    obj.color));
+                                i += operatorObj.operator.length;
+                                still_looking_for = false;
+                                return false;
+                            }
+
+                            return true;
+                        });
+                    }
+
+                    if (still_looking_for && obj.regexes !== undefined) {
+                        obj.regexes.every(function(regexObj){
+                          var matched_regex = highlighter.matchRegex(
+                              regexObj.regex,
+                              regexObj.modifier,
                               code,
-                              i) {
-                              tokens.push(new Token(operatorObj.operator,
+                              i);
+                          if (matched_regex !== null) {
+                              tokens.push(new Token(matched_regex[0],
                                   i,
-                                  operatorObj.operator.length,
+                                  matched_regex[0].length,
                                   obj.color));
+                              i += matched_regex[0].length;
                               still_looking_for = false;
                               return false;
                           }
 
                           return true;
-                      });
-                  }
+                        });
+                    }
 
-                  if (!still_looking_for && obj.regexes !== undefined) {
-                      obj.regexes.every(function(regexObj){
-                        if () {
-                            tokens.push(new Token(operatorObj.operator,
-                                i,
-                                operatorObj.operator.length,
-                                obj.color));
-                            still_looking_for = false;
-                            return false;
-                        }
+                    return still_looking_for;
+                });
 
-                        return true;
-                      });
-                  }
-
-                  return still_looking_for;
-              });
-              // we don't have any grammar for this object,
-              // so we ignore it and go to the next one
-              i++;
+                // we don't have any grammar for this object,
+                // so we ignore it and go to the next one
+                if (still_looking_for) {
+                  i++;
+                }
             }
         }
 
