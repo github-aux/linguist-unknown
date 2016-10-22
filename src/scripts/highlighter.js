@@ -17,9 +17,51 @@ function Highlighter(langObj) {
         for (var i = 0, cell; cell = cells[i]; i++) {
             if (cell.id.indexOf("LC") !== -1) {
                 var tokens = this.lexer(cell.innerHTML);
-                console.log(tokens);
+                cell.innerHTML = this.paint(tokens, cell.innerHTML);
             }
         }
+    };
+
+    this.paint = function(tokens, code) {
+        if (tokens.length == 0) {
+            return this.getSpan(code, this.langObj.default_color);
+        }
+
+        var next_pos = 0;
+        var token_idx = 0;
+        var new_code = "";
+        while(next_pos < code.length && token_idx < tokens.length) {
+            if (tokens[token_idx].pos > next_pos) {
+                new_code += this.getSpan(code.substring(next_pos,
+                    tokens[token_idx]), this.langObj.default_color);
+                next_pos = tokens[token_idx];
+            }
+
+            var color = tokens[token_idx].color;
+            new_code += this.openSpan(color);
+            new_code += tokens[token_idx].value;
+            next_pos += tokens[token_idx].size;
+            token_idx++;
+            while(next_pos < code.length && tokens[token_idx].color === color) {
+                break;
+            }
+
+            new_code += this.closeSpan();
+        }
+
+        return new_code;
+    };
+
+    this.openSpan = function(color) {
+        return '<span style="color:' + color + ';">';
+    };
+
+    this.closeSpan = function () {
+        return '</span>';
+    };
+
+    this.getSpan = function (value, color) {
+        return this.openSpan(color) + value + this.closeSpan;
     };
 
     this.isId = function(char, beginningId) {
@@ -130,7 +172,6 @@ function Highlighter(langObj) {
                             pos, mult_comment.length, color_comment));
                         i += mult_comment.length;
                 });
-
             } else if (this.startsWith(this.langObj.single_line_comment,
                 code,
                 i)) {
@@ -196,7 +237,7 @@ function Highlighter(langObj) {
                 this.langObj.grammar.every(function(obj){
                     if (obj.operators !== undefined) {
                         obj.operators.every(function(operatorObj){
-                            if (this.startsWith(operatorObj.operator,
+                            if (highlighter.startsWith(operatorObj.operator,
                                 code,
                                 i)) {
                                 tokens.push(new Token(operatorObj.operator,
@@ -247,32 +288,3 @@ function Highlighter(langObj) {
         return tokens;
     };
 }
-
-// this.langObj.grammar.every(function(obj){
-//     if (obj.operators !== undefined) {
-//         var found = false;
-//         obj.operators.every(function(objOperator){
-//             if (code.substring(i, code.length).startsWith(objOperator.operator)) {
-//                 var begin_color = '<span style="color:'+ obj.color+ ';">';
-//                 code = [code.slice(0, i), begin_color, code.slice(i)].join('');
-//                 i += objOperator.operator.length + begin_color.length;
-//                 var end_color = "</span>";
-//                 code = [code.slice(0, i), end_color, code.slice(i)].join('');
-//                 i += end_color.length;
-//                 i--; // that will be incremented at the end
-//                 found = true;
-//                 // break the callback
-//                 return false;
-//             }
-//
-//             return true;
-//         });
-//
-//         if (found) {
-//             // break the parent callback
-//             return false;
-//         }
-//     }
-//
-//     return true;
-// });
