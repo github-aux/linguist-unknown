@@ -23,33 +23,7 @@ function Highlighter(langObj) {
     };
 
     this.paint = function(tokens, code) {
-        if (tokens.length == 0) {
-            return this.getSpan(code, this.langObj.default_color);
-        }
-
-        var next_pos = 0;
-        var token_idx = 0;
-        var new_code = "";
-        while(next_pos < code.length && token_idx < tokens.length) {
-            if (tokens[token_idx].pos > next_pos) {
-                new_code += this.getSpan(code.substring(next_pos,
-                    tokens[token_idx]), this.langObj.default_color);
-                next_pos = tokens[token_idx];
-            }
-
-            var color = tokens[token_idx].color;
-            new_code += this.openSpan(color);
-            new_code += tokens[token_idx].value;
-            next_pos += tokens[token_idx].size;
-            token_idx++;
-            while(next_pos < code.length && tokens[token_idx].color === color) {
-                break;
-            }
-
-            new_code += this.closeSpan();
-        }
-
-        return new_code;
+        return this.getSpan(code, this.langObj.default_color);
     };
 
     this.openSpan = function(color) {
@@ -61,7 +35,7 @@ function Highlighter(langObj) {
     };
 
     this.getSpan = function (value, color) {
-        return this.openSpan(color) + value + this.closeSpan;
+        return this.openSpan(color) + value + this.closeSpan();
     };
 
     this.isId = function(char, beginningId) {
