@@ -23,7 +23,35 @@ function Highlighter(langObj) {
     };
 
     this.paint = function(tokens, code) {
-        return this.getSpan(code, this.langObj.default_color);
+        if (tokens.length == 0) {
+            return this.getSpan(code, this.langObj.default_color);       
+        }
+
+        var new_code = "";
+        var next_pos = 0;
+        var token_idx = 0;
+
+        while (next_pos < code.length) {
+            if (token_idx < tokens.length &&
+                next_pos < tokens[token_idx].pos) {
+                new_code += this.getSpan(code.substring(next_pos,       
+                    tokens[token_idx].pos), this.langObj.default_color);
+                next_pos = tokens[token_idx].pos;
+            } else if (token_idx == tokens.length) {
+                new_code += this.getSpan(code.substring(next_pos,       
+                    code.length), this.langObj.default_color);
+                next_pos = code.length;
+            } else {
+                new_code += this.openSpan(tokens[token_idx].color);
+                new_code += tokens[token_idx].value;
+                new_code += this.closeSpan();
+
+                next_pos += tokens[token_idx].value.length;
+                token_idx++;
+            }
+        }
+
+        return new_code;
     };
 
     this.openSpan = function(color) {
