@@ -42,12 +42,21 @@ function Highlighter(langObj) {
                     code.length), this.langObj.default_color);
                 next_pos = code.length;
             } else {
-                new_code += this.openSpan(tokens[token_idx].color);
+                var token_color = tokens[token_idx].color
+                new_code += this.openSpan(token_color);
                 new_code += tokens[token_idx].value;
-                new_code += this.closeSpan();
-
                 next_pos += tokens[token_idx].value.length;
                 token_idx++;
+
+                while(token_idx < tokens.length &&
+                    next_pos == tokens[token_idx].pos &&
+                    tokens[token_idx].color == token_color) {
+                    new_code += tokens[token_idx].value;
+                    next_pos += tokens[token_idx].value.length;
+                    token_idx++;
+                }
+
+                new_code += this.closeSpan();
             }
         }
 
