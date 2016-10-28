@@ -188,8 +188,8 @@ function Highlighter(langObj) {
             } else if (this.isId(code[i], true)) {
                 this.getId(code, i, function(id, pos, langObj){
                     var color_id = langObj.default_color;
+                    var not_found = true;
                     langObj.grammar.every(function(keys) {
-                        var not_found = true;
                         if (keys.keywords !== undefined) {
                             keys.keywords.every(function(keyObj) {
                                 if (keyObj.keyword.valueOf() == id.valueOf()) {
@@ -205,6 +205,10 @@ function Highlighter(langObj) {
                         // false stops the "loop"
                         return not_found;
                     });
+
+                    if (not_found && this.langObj.id_color !== undefined) {
+                        color_id = this.langObj.id_color;
+                    }
 
                     tokens.push(new Token(id, pos, id.length, color_id));
                     i += id.length;
