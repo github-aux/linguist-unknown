@@ -206,8 +206,8 @@ function Highlighter(langObj) {
                         return not_found;
                     });
 
-                    if (not_found && this.langObj.id_color !== undefined) {
-                        color_id = this.langObj.id_color;
+                    if (not_found && langObj.id_color !== undefined) {
+                        color_id = langObj.id_color;
                     }
 
                     tokens.push(new Token(id, pos, id.length, color_id));
