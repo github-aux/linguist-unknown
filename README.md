@@ -19,6 +19,7 @@ See  [`CONTRIBUTING.md`](/CONTRIBUTING.md) before creating a pull request.
 - [Why](#why-should-you-download-it)
 - [Download](#how-can-i-download-and-use-it)
 - [Add language](#why-should-i-add-my-language)
+- [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -32,12 +33,28 @@ __Two Simple Steps__:
 - Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk).
 - Make sure it is active.
 
+<img alt="On/Off" src="./img/on_off.gif" />
+
 ### Why Should I add my language?
 Having your programming language listed/highlighted by GitHub is not always as easy when your programming language has not been largely used yet. Thus, adding your language to this repository will help you to do what you already do on your favorite Text Editor.
 
 This project is meant to be a `Highlighter` of `Preview` for GitHub Unknown Languages.
 
-## Contributing
+### Examples
+
+- Brain Language
+
+<p>
+<img alt="Brain" src="./img/brain_change.gif" />
+</p>
+
+- Test
+
+<p>
+<img alt="Test" src="./img/changing_test.gif" width="450px"/>
+</p>
+
+### Contributing
 Please check out our [contributing guidelines](CONTRIBUTING.md).
 
 ### LICENSE
