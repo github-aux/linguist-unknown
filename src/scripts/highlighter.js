@@ -14,7 +14,8 @@ function Highlighter(langObj) {
         var table = document.getElementsByClassName("blob-wrapper")[0]
                             .getElementsByTagName("table")[0];
         var cells = table.querySelectorAll('tbody td');
-        for (var i = 0, cell; cell = cells[i]; i++) {
+        for (var i = 0; i < cells.length; i++) {
+            var cell = cells[i];
             if (cell.id.indexOf("LC") !== -1) {
                 var tokens = this.lexer(cell.innerHTML);
                 cell.innerHTML = this.paint(tokens, cell.innerHTML);
@@ -23,7 +24,7 @@ function Highlighter(langObj) {
     };
 
     this.paint = function(tokens, code) {
-        if (tokens.length == 0) {
+        if (tokens.length === 0) {
             return this.getSpan(code, this.langObj.default_color);       
         }
 
@@ -37,7 +38,7 @@ function Highlighter(langObj) {
                 new_code += this.getSpan(code.substring(next_pos,       
                     tokens[token_idx].pos), this.langObj.default_color);
                 next_pos = tokens[token_idx].pos;
-            } else if (token_idx == tokens.length) {
+            } else if (token_idx === tokens.length) {
                 new_code += this.getSpan(code.substring(next_pos,       
                     code.length), this.langObj.default_color);
                 next_pos = code.length;
@@ -49,7 +50,7 @@ function Highlighter(langObj) {
                 token_idx++;
 
                 while(token_idx < tokens.length &&
-                    next_pos == tokens[token_idx].pos &&
+                    next_pos === tokens[token_idx].pos &&
                     tokens[token_idx].color == token_color) {
                     new_code += tokens[token_idx].value;
                     next_pos += tokens[token_idx].value.length;
@@ -78,7 +79,7 @@ function Highlighter(langObj) {
     this.isId = function(char, beginningId) {
         return (char >= 'a' && char <= 'z') ||
                (char >= 'A' && char <= 'Z') ||
-               (char == '_') ||
+               (char === '_') ||
                (!beginningId && this.isNumber(char));
     };
 
@@ -87,7 +88,7 @@ function Highlighter(langObj) {
     };
 
     this.isLiteralString = function(char) {
-        return char == "\"" || char == "'";
+        return char === "\"" || char === "'";
     };
 
     this.startsWith = function(lexeme, code, idx) {
@@ -132,7 +133,7 @@ function Highlighter(langObj) {
         do {
             idx++;
             str += code[idx];
-        } while (idx < code.length && code[idx] != code[pos_str]);
+        } while (idx < code.length && code[idx] !== code[pos_str]);
 
         callback(str, pos_str, this.langObj);
     };
@@ -159,7 +160,7 @@ function Highlighter(langObj) {
         var tokens = Array();
         var i = 0;
         while (i < code.length) {
-            if (code[i] == ' ' || code[i] == '\t' || code[i] == '\n'){
+            if (code[i] === ' ' || code[i] === '\t' || code[i] === '\n'){
                 i++;
                 continue;
             }
@@ -201,7 +202,7 @@ function Highlighter(langObj) {
                     langObj.grammar.every(function(keys) {
                         if (keys.keywords !== undefined) {
                             keys.keywords.every(function(keyObj) {
-                                if (keyObj.keyword.valueOf() == id.valueOf()) {
+                                if (keyObj.keyword.valueOf() === id.valueOf()) {
                                     color_id = keys.color;
                                     not_found = false;
                                     return false;
