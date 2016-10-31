@@ -51,7 +51,7 @@ function Highlighter(langObj) {
 
                 while(token_idx < tokens.length &&
                     next_pos === tokens[token_idx].pos &&
-                    tokens[token_idx].color == token_color) {
+                    tokens[token_idx].color === token_color) {
                     new_code += tokens[token_idx].value;
                     next_pos += tokens[token_idx].value.length;
                     token_idx++;
