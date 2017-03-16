@@ -38,7 +38,7 @@ __Two Simple Steps__:
 ### Why Should I add my language?
 Having your programming language listed/highlighted by GitHub is not always as easy when your programming language has not been largely used yet. Thus, adding your language to this repository will help you to do what you already do on your favorite Text Editor.
 
-This project is meant to be a `Highlighter` of `Preview` for GitHub Unknown Languages.
+This project is meant to be a `Preview Code Highlighter` for GitHub Unknown Languages.
 
 ### Examples
 
