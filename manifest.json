@@ -30,7 +30,8 @@
       "css": ["./src/css/linguist_style.css"],
       "js": ["./src/scripts-min/js-yaml.min.js",
              "./src/scripts/highlighter.js",
-             "./src/scripts/json_loader.js"],
+             "./src/scripts/loader.js",
+             "./src/scripts/bootstrap.js"],
       "run_at": "document_start"
     }
   ]
