@@ -53,11 +53,21 @@ var LinguistLoader = (function() {
     };
 
     Utilities.prototype.refresh = function() {
+        var new_url = window.location.href;
+        if (new_url === current_url) {
+            return;
+        }
+
+        current_url = new_url;
+        // TODO: look for file .linguist.yml
+        // TODO: set url base for the repo
         var url = "https://raw.githubusercontent.com/brain-labs/brain/master/.travis.yml";
-        var downloadHelper = new DownloadHelper();
-        downloadHelper.load(url, function(objs){
-            console.log(objs);
-        });
+        window.setTimeout(function() {
+            var downloadHelper = new DownloadHelper();
+                downloadHelper.load(url, function(objs){
+                console.log(objs);
+            });
+        }, 100);
     };
 
     // this.refresh = function() {
