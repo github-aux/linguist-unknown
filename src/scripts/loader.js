@@ -1,4 +1,8 @@
 var LinguistLoader = (function() {
+  const GITHUB_BASE = "https://raw.githubusercontent.com";
+  const FILENAME = ".travis.yml";
+
+  var linguistObj = "";
   var current_url = "";
     
   var DownloadHelper = (function() {
@@ -59,12 +63,21 @@ var LinguistLoader = (function() {
         }
 
         current_url = new_url;
-        // TODO: look for file .linguist.yml
-        // TODO: set url base for the repo
-        var url = "https://raw.githubusercontent.com/brain-labs/brain/master/.travis.yml";
+        var linguistFile = document.querySelectorAll(".content a[title='" + FILENAME + "']");
+        if (linguistFile[0] !== undefined && (linguistObj === null || linguistFile[0].baseURI !== linguistObj.baseURI)) {
+          linguistObj = { 
+              path: GITHUB_BASE + linguistFile[0].pathname.replace('blob/',''),
+              baseURI: linguistFile[0].baseURI
+          };
+        }
+
+        if (linguistObj === null || linguistObj.path === undefined) {
+            return;
+        }
+
         window.setTimeout(function() {
             var downloadHelper = new DownloadHelper();
-                downloadHelper.load(url, function(objs){
+            downloadHelper.load(linguistObj.path, function(objs){
                 console.log(objs);
             });
         }, 100);
