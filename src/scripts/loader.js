@@ -2,7 +2,7 @@ var LinguistLoader = (function() {
   const GITHUB_HOST = "github.com";
   const GITHUB_URL_FILE = "blob/";
   const GITHUB_RAW = "https://raw.githubusercontent.com";
-  const FILENAME = ".travis.yml";
+  const FILENAME = ".linguist.yml";
 
   var linguistObj = null;
   var current_url = "";
