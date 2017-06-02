@@ -1,8 +1,10 @@
 var LinguistLoader = (function() {
-  const GITHUB_BASE = "https://raw.githubusercontent.com";
+  const GITHUB_HOST = "github.com";
+  const GITHUB_URL_FILE = "blob/";
+  const GITHUB_RAW = "https://raw.githubusercontent.com";
   const FILENAME = ".travis.yml";
 
-  var linguistObj = "";
+  var linguistObj = null;
   var current_url = "";
     
   var DownloadHelper = (function() {
@@ -12,6 +14,10 @@ var LinguistLoader = (function() {
         xhr.open("GET", url, true);
         xhr.onload = function () {
             try {
+                if (xhr.status === 404) {
+                    return; // ignore if file is not found
+                }
+
                 var resp = jsyaml.load(xhr.responseText);
                 callback(resp);
             } catch(e) {
@@ -56,23 +62,26 @@ var LinguistLoader = (function() {
         });
     };
 
+    Utilities.prototype.isGithub = function(l) {
+        return l.hostname === GITHUB_HOST && l.href.includes(GITHUB_URL_FILE);
+    };
+
+    Utilities.prototype.getPossibleFilepath = function(l) {
+        var uri = l.pathname.split(GITHUB_URL_FILE);
+        return GITHUB_RAW + uri[0] + uri[1].split('/')[0] + '/' + FILENAME;
+    };
+
     Utilities.prototype.refresh = function() {
         var new_url = window.location.href;
-        if (new_url === current_url) {
+        if (new_url === current_url || !this.isGithub(window.location)) {
             return;
         }
 
         current_url = new_url;
-        var linguistFile = document.querySelectorAll(".content a[title='" + FILENAME + "']");
-        if (linguistFile[0] !== undefined && (linguistObj === null || linguistFile[0].baseURI !== linguistObj.baseURI)) {
+        if (linguistObj === null) {
           linguistObj = { 
-              path: GITHUB_BASE + linguistFile[0].pathname.replace('blob/',''),
-              baseURI: linguistFile[0].baseURI
+              path: this.getPossibleFilepath(window.location)
           };
-        }
-
-        if (linguistObj === null || linguistObj.path === undefined) {
-            return;
         }
 
         window.setTimeout(function() {
