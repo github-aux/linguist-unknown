@@ -22,7 +22,7 @@ function restore_options() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
     restore_options();
     document.getElementById('main-checkbox').addEventListener('change',
         save_options,
