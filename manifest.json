@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Linguist Unknown",
   "description": "Language Savant for unknown, lost or new programming languages on GitHub.",
@@ -29,9 +29,7 @@
                   "https://github.com/*"],
       "css": ["./src/css/linguist_style.css"],
       "js": ["./src/scripts-min/js-yaml.min.js",
-             "./src/scripts/highlighter.js",
-             "./src/scripts/loader.js",
-             "./src/scripts/bootstrap.js"],
+             "./src/scripts-min/linguist.min.js"],
       "run_at": "document_start"
     }
   ]
