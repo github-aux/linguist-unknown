@@ -202,7 +202,7 @@ function Highlighter(langObj) {
                     langObj.grammar.every(function(keys) {
                         if (keys.keywords !== undefined) {
                             keys.keywords.every(function(keyObj) {
-                                if (keyObj.keyword.valueOf() === id.valueOf()) {
+                                if (keyObj.valueOf() === id.valueOf()) {
                                     color_id = keys.color;
                                     not_found = false;
                                     return false;
@@ -252,15 +252,15 @@ function Highlighter(langObj) {
                 // check if it is operator or match any regex
                 this.langObj.grammar.every(function(obj){
                     if (obj.operators !== undefined) {
-                        obj.operators.every(function(operatorObj){
-                            if (highlighter.startsWith(operatorObj.operator,
+                        obj.operators.every(function(operator){
+                            if (highlighter.startsWith(operator,
                                 code,
                                 i)) {
-                                tokens.push(new Token(operatorObj.operator,
+                                tokens.push(new Token(operator,
                                     i,
-                                    operatorObj.operator.length,
+                                    operator.length,
                                     obj.color));
-                                i += operatorObj.operator.length;
+                                i += operator.length;
                                 still_looking_for = false;
                                 return false;
                             }
