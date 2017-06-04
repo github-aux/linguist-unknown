@@ -58,7 +58,8 @@ Test:
         - "for"
         - "while"
       regexes:
-        - "&(amp;)\/[^\/]*\/([\\S]?)*"
+        - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
+          modifier: ""
     
     - color: "#FF00FF"
       keywords:
