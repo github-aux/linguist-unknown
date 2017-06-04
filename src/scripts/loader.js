@@ -6,7 +6,7 @@ var LinguistLoader = (function() {
 
   var linguistObj = null;
   var current_url = "";
-    
+
   var DownloadHelper = (function() {
     var DownloadHelper = function() { };
     DownloadHelper.prototype.load = function(url, callback) {
@@ -70,7 +70,7 @@ var LinguistLoader = (function() {
 
         current_url = new_url;
         if (linguistObj === null) {
-          linguistObj = { 
+          linguistObj = {
               path: this.getPossibleFilepath(window.location)
           };
         }
@@ -80,7 +80,7 @@ var LinguistLoader = (function() {
             var downloadHelper = new DownloadHelper();
             downloadHelper.load(linguistObj.path, function(objs){
                 that.tryMatchUrlExtension(current_url, objs, function(langObj){
-                    new Highlighter(langObj).draw();
+                    new LinguistHighlighter.Highlighter(langObj).draw();
                 });
             });
         }, 100);
@@ -91,6 +91,5 @@ var LinguistLoader = (function() {
 
   return {
     Utilities: Utilities
-  };   
+  };
 }());
-
