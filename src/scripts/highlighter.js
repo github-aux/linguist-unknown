@@ -56,12 +56,31 @@ var LinguistHighlighter = (function() {
                   next_pos += tokens[token_idx].value.length;
                   token_idx++;
 
-                  while(token_idx < tokens.length &&
-                      next_pos === tokens[token_idx].pos &&
-                      tokens[token_idx].color === token_color) {
-                      new_code += tokens[token_idx].value;
-                      next_pos += tokens[token_idx].value.length;
-                      token_idx++;
+                  var neighborDefault = true;
+                  var neighborSameColor = true;
+
+                  while(neighborDefault || neighborSameColor) {
+                      if(token_color === this.langObj.default_color &&
+                          token_idx < tokens.length &&
+                          next_pos < tokens[token_idx].pos) {
+                          new_code += code.substring(next_pos,
+                                       tokens[token_idx].pos);
+                          next_pos = tokens[token_idx].pos;
+                          neighborDefault = true;
+                      } else {
+                          neighborDefault = false;
+                      }
+
+                      if(token_idx < tokens.length &&
+                          next_pos === tokens[token_idx].pos &&
+                          tokens[token_idx].color === token_color) {
+                          new_code += tokens[token_idx].value;
+                          next_pos += tokens[token_idx].value.length;
+                          token_idx++;
+                          neighborSameColor = true;
+                      } else {
+                          neighborSameColor = false;
+                      }
                   }
 
                   new_code += this.closeSpan();
