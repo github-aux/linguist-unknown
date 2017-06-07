@@ -5,7 +5,7 @@ C:
     - ".c"
   default_color: "#24292e"
   comment_color: "#969896"
-  id_color: "#C2E812"
+  id_color: "#7b9c0e"
   number_color: "#745296"
   string_color: "#8B9EB7"
   single_line_comment: "//"
