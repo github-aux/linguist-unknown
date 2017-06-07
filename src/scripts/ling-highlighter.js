@@ -24,7 +24,7 @@ var LinguistHighlighter = (function() {
           for (var i = 0; i < cells.length; i++) {
               var cell = cells[i];
               if (cell.id.indexOf("LC") !== -1) {
-                  var tokens = this.lexer(cell.innerHTML);
+                  var tokens = this.lexer(cell.innerText); // ignore GH spans
                   cell.innerHTML = this.paint(tokens, cell.innerHTML);
               }
           }

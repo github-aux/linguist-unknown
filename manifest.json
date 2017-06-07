@@ -29,7 +29,9 @@
                   "https://github.com/*"],
       "css": ["./src/css/linguist_style.css"],
       "js": ["./src/scripts-min/js-yaml.min.js",
-             "./src/scripts-min/linguist.min.js"],
+             "./src/scripts/ling-bootstrap.js",
+             "./src/scripts/ling-loader.js",
+             "./src/scripts/ling-highlighter.js"],
       "run_at": "document_start"
     }
   ]
