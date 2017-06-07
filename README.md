@@ -20,7 +20,7 @@ See  [`CONTRIBUTING.md`](/CONTRIBUTING.md) before creating a pull request.
 - [Download](#how-can-i-download-and-use-it)
 - [Check if Linguist Unknown works](#how-do-i-know-if-it-works)
   - [Check if your yaml is valid](#how-do-i-know-my-yaml-is-valid)
-- [Highlighting a new language](#how-to-highlight-my-language)
+- [Highlighting a new language](#how-to-highlight-my-languages)
 - [Examples](#examples)
 - [Documentation](#documentation)
     - [Multiple Languages](#multiple-languages-in-same-repo)
@@ -70,7 +70,7 @@ Please read the [documentation](#documentation) and check if your YAML is valid 
 ### How to highlight my language(s)?
 1. [Download](#how-can-i-download-and-use-it) and install `Linguist Unknown`.
 2. Add a file named `.linguist.yml` into the root of your GitHub repository to tell `Linguist Unknown` your language(s) grammar(s).
-3. Write your grammar(s) rules. The example below tells `Linguist Unknown` that you have a programming language called `Foo` whose extensions are `.foo` and `.bar`. It also tells that `Foo`'s single linge comment is defined by `//`, whereas its multiline comments are defined by `/*` and `*/`. Last but not least, it defines the color of your tokens i.e. __id_color__ _(identifier color)_, __number_color__. It also helps you to define the color groups of your grammar's `keywords`, `operators` and customizable with `regexes`
+3. Write your grammar(s) rules. The example below tells `Linguist Unknown` that you have a programming language called `Foo` whose extensions are `.foo` and `.bar`. It also tells that `Foo`'s single linge comment is defined by `//`, whereas its multiline comments are defined by `/*` and `*/`. Last but not least, it defines the color of your tokens i.e. __id_color__ _(identifier color)_, __number_color__. It also helps you to define the color groups of your grammar's `keywords`, `operators` and customizable `regexes`
 ```
 Foo:
   extensions:
@@ -326,8 +326,8 @@ Defines a list of `operators` for a grammar color group.
         - ">"
 ``` 
 
-###### operators
-Defines a list of `regexes` for a grammar color group. The `regexes` properties can be used as a property that may identify custom `lexemes` (lexemes not included by `Linguist Unknown`). For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
+###### regexes
+Defines a list of `regexes` for a grammar color group. The `regexes` properties can be used as a property that may identify custom `lexemes` not included by `Linguist Unknown`. For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
 ```
   grammar:
     - color: "#FF0000"
