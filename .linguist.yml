@@ -1,4 +1,32 @@
 ---
+# Testing overwriting C colors
+C:
+  extensions:
+    - ".c"
+  default_color: "#24292e"
+  comment_color: "#969896"
+  id_color: "#C2E812"
+  number_color: "#745296"
+  string_color: "#8B9EB7"
+  single_line_comment: "//"
+  begin_multiline_comment: "/*"
+  end_multiline_comment: "*/"
+  
+  grammar:
+    - color: "#a71d5d"
+      keywords:
+        - "include"
+        - "void"
+        - "int"
+        - "float"
+    
+    - color: "#FF1053"
+      keywords:
+        - "printf"
+        - "putchar"
+        - "getchar"
+
+# Including a complete new language
 Brain:
   extensions:
     - ".br"
@@ -41,7 +69,7 @@ Brain:
         - "$"
         - "#"
 
-# Testing GitHub known languages
+# Overwriting BF - Testing GitHub known languages
 Brainfuck:
   extensions:
     - ".bf"
@@ -55,7 +83,7 @@ Brainfuck:
         - "&lt;"
         - "&gt;"
         
-    - color: "#333333"
+    - color: "#B744B8"
       operators:
         - "["
         - "]"
@@ -70,6 +98,7 @@ Brainfuck:
         - "."
         - ","
 
+# Testing Regex and others
 Test:
   extensions:
     - ".test"
