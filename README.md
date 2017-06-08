@@ -84,7 +84,7 @@ Foo:
   single_line_comment: "//"
   begin_multiline_comment: "/*"
   end_multiline_comment: "*/"
-  
+
   grammar:
     - color: "#72EEBB"
       operators:
@@ -96,7 +96,7 @@ Foo:
       regexes:
         - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
           modifier: ""
-    
+
     - color: "#FF00FF"
       keywords:
         - "if"
@@ -116,7 +116,7 @@ Brain:
     - ".br"
     - ".brain"
   default_color: "#969896"
-  
+
   grammar:
     - color: "#a71d5d"
       operators:
@@ -125,7 +125,7 @@ Brain:
         - "^"
         - "&lt;"
         - "&gt;"
-        
+
     - color: "#333333"
       operators:
         - "["
@@ -136,7 +136,7 @@ Brain:
         - ":"
         - ";"
         - "!"
-        
+
     - color: "#0086b3"
       operators:
         - "+"
@@ -145,7 +145,7 @@ Brain:
         - "/"
         - "%"
         - "_"
-    
+
     - color: "#795da3"
       operators:
         - "."
@@ -175,7 +175,7 @@ Test:
   single_line_comment: "//"
   begin_multiline_comment: "/*"
   end_multiline_comment: "*/"
-  
+
   grammar:
     - color: "#72EEBB"
       keywords:
@@ -184,7 +184,7 @@ Test:
       regexes:
         - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
           modifier: ""
-    
+
     - color: "#FF00FF"
       keywords:
         - "if"
@@ -209,7 +209,7 @@ Foo:
   extensions:
     - ".foo"
   ... other rules
-  
+
 Bar:
   extensions:
     - ".bar"
@@ -324,7 +324,7 @@ Defines a list of `operators` for a grammar color group.
         - "=="
         - "!="
         - ">"
-``` 
+```
 
 ###### regexes
 Defines a list of `regexes` for a grammar color group. The `regexes` properties can be used as a property that may identify custom `lexemes` not included by `Linguist Unknown`. For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
@@ -334,12 +334,12 @@ Defines a list of `regexes` for a grammar color group. The `regexes` properties 
       regexes:
         - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
           modifiers: ""
-``` 
+```
 
 ### Contributing
 Feel free to send your pull requests. :)
 
+We use the [Airbnb Style Guide](https://github.com/airbnb/javascript) in our project.
+
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
-
-
