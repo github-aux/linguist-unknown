@@ -12,7 +12,7 @@
 # Linguist Unknown
 > This repository is used as a Web Browser extension for the website GitHub.com in order to detect and highlight unknown, lost or new programming languages.
 
-See  [`CONTRIBUTING.md`](/CONTRIBUTING.md) before creating a pull request.
+See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
 
 # <img src="https://github.com/brain-labs/brainstation/blob/master/img/table_of_contents.png" alt="table of contents">
 
@@ -337,9 +337,7 @@ Defines a list of `regexes` for a grammar color group. The `regexes` properties 
 ```
 
 ### Contributing
-Feel free to send your pull requests. :)
-
-We use the [Airbnb Style Guide](https://github.com/airbnb/javascript) in our project.
+Feel free to send your pull requests. Read our [CONTRIBUTING.md](CONTRIBUTING.md) file :)
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
