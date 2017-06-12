@@ -101,3 +101,6 @@ var LinguistLoader = (function() {
     Utilities: Utilities
   };
 }());
+
+exports.LinguistLoader = LinguistLoader;
+

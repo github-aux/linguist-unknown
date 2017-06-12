@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "Language Savant for unknown, lost or new programming languages. Use it if your repo's language is not included on GitHub Linguist",
   "scripts": {
-    "test": "npm test"
+    "test": "node_modules/.bin/mocha"
   },
   "license": "GPL-3.0",
   "devDependencies": {
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "should": ">= 0.0.1"
   }
 }
+
