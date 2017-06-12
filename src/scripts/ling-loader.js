@@ -54,6 +54,7 @@ var LinguistLoader = (function() {
         return true;
       };
 
+      var langKey = null;
       while ((langKey = keys[i++]) && still_looking_for) {
         lang = objs[langKey];
         lang.extensions.every(extFunc);
