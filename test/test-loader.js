@@ -3,7 +3,7 @@
 var LinguistLoader = require('../src/scripts/ling-loader.js').LinguistLoader;
 
 describe('Loader', function () {
-  describe('getPossibleFilepath', function() {
+  describe('Filepath', function() {
     it('should get the possible filepath correctly', function (done) {
       var location = {
         pathname: "/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain"
