@@ -337,3 +337,6 @@ var LinguistHighlighter = (function() {
     Highlighter: Highlighter
   };
 }());
+
+exports.LinguistHighlighter = LinguistHighlighter;
+

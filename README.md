@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="#"><img alt="Open Source" src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" /></a>
-<a href="#"><img alt="Percentage" src="http://progressed.io/bar/100" /></a>
+<a href="#"><img alt="Travis" src="https://travis-ci.org/github-aux/linguist-unknown.svg" /></a>
 <a href="#"><img alt="Badges" src="https://david-dm.org/boennemann/badges/status.svg" /></a>
 <a href="#"><img alt="GPL" src="https://badges.frapsoft.com/os/gpl/gpl.png?v=103" /></a>
 </p>
