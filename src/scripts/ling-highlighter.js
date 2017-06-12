@@ -155,11 +155,16 @@ var LinguistHighlighter = (function() {
 
       Highlighter.prototype.getLiteralString = function(code, idx, callback) {
           var pos_str = idx;
-          var str = code[idx];
-          do {
-              idx++;
-              str += code[idx];
-          } while (idx < code.length && code[idx] !== code[pos_str]);
+          var str = code[idx++];
+          while (idx < code.length && code[idx] !== code[pos_str]) {
+              str += code[idx++];
+          }
+
+          if (!code[idx]) {
+            return false;
+          }
+          
+          str += code[idx];
 
           callback(str, pos_str, this.langObj);
       };
@@ -249,8 +254,8 @@ var LinguistHighlighter = (function() {
                       tokens.push(new Token(id, pos, id.length, color_id));
                       i += id.length;
                   });
-              } else if (this.isLiteralString(code[i])){
-                  this.getLiteralString(code, i, function(str, pos, langObj){
+              } else if (this.isLiteralString(code[i])
+                  && this.getLiteralString(code, i, function(str, pos, langObj){
                       var color_string = langObj.default_color;
                       if (langObj.string_color !== undefined) {
                           color_string = langObj.string_color;
@@ -258,7 +263,10 @@ var LinguistHighlighter = (function() {
 
                       tokens.push(new Token(str, pos, str.length, color_string));
                       i += str.length;
-                  });
+                  })){
+
+                  /*do nothing*/ 
+
               } else if (this.isNumber(code[i])) {
                   this.getNumber(code, i, function(number, pos, langObj){
                       var color_number = langObj.default_color;

@@ -135,9 +135,7 @@ describe('HighLighter', function () {
         str.should.equal("\"my beautiful string\"");
       });
 
-      highlighter.getLiteralString("******\"******", 6, function(str, pos, langObj) {
-        str.should.equal("\"******");
-      });
+      highlighter.getLiteralString("******\"******", 6, null).should.equal(false);
 
       highlighter.getLiteralString("******'c'******", 6, function(str, pos, langObj) {
         str.should.equal("'c'");
