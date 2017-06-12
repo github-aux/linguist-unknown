@@ -98,7 +98,8 @@ var LinguistLoader = (function() {
   }());
 
   return {
-    Utilities: Utilities
+    Utilities: Utilities,
+    DownloadHelper: DownloadHelper
   };
 }());
 

@@ -334,7 +334,8 @@ var LinguistHighlighter = (function() {
   }());
 
   return {
-    Highlighter: Highlighter
+    Highlighter: Highlighter,
+    Token: Token
   };
 }());
 

@@ -12,6 +12,7 @@ cache:
 before_script:
   - "npm install mocha"
   - "npm install should"
+  - "npm install xmlhttprequest"
 
 script:
   - "npm test"

@@ -1,4 +1,5 @@
 --require should
+--require xmlhttprequest
 -R spec
 --ui bdd
 --recursive
