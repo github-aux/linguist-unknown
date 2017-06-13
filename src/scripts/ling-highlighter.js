@@ -17,9 +17,7 @@ var LinguistHighlighter = (function() {
           this.isMultilineComment = false;
       };
 
-      Highlighter.prototype.draw = function() {
-          var table = document.getElementsByClassName("blob-wrapper")[0]
-                              .getElementsByTagName("table")[0];
+      Highlighter.prototype.draw = function(table) {
           var cells = table.querySelectorAll('tbody td');
           for (var i = 0; i < cells.length; i++) {
               var cell = cells[i];

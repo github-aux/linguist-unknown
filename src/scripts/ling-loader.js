@@ -88,7 +88,9 @@ var LinguistLoader = (function() {
         var downloadHelper = new DownloadHelper();
         downloadHelper.load(linguistObj.path, function(objs){
           this.tryMatchUrlExtension(current_url, objs, function(langObj){
-            new LinguistHighlighter.Highlighter(langObj).draw();
+            var table = document.getElementsByClassName("blob-wrapper")[0]
+                              .getElementsByTagName("table")[0];
+            new LinguistHighlighter.Highlighter(langObj).draw(table);
           });
         }.bind(this));
       }.bind(this), 100);

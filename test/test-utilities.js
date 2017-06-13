@@ -4,7 +4,6 @@ var LinguistLoader = require('../src/scripts/ling-loader.js').LinguistLoader;
 
 describe('Loader', function () {
   var utilities = new LinguistLoader.Utilities();
-
   describe('Filepath', function() {
     it('should get the possible filepath correctly', function (done) {
       var location = {
@@ -16,7 +15,5 @@ describe('Loader', function () {
       done();
     });
   });
-
-  
 });
 
