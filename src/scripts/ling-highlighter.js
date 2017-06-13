@@ -149,7 +149,7 @@ var LinguistHighlighter = (function() {
 
       Highlighter.prototype.getNumber = function(code, idx, callback) {
           var number = code.substring(idx, code.length)
-                           .match(new RegExp("^[-+]?[0-9]*\.?[0-9]+"))[0];
+                           .match(new RegExp("^[0-9]*[.]?[0-9]+"))[0];
           callback(number, idx, this.langObj);
       };
 
