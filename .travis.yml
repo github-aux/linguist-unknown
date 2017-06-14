@@ -13,6 +13,7 @@ before_script:
   - "npm install mocha"
   - "npm install should"
   - "npm install xmlhttprequest"
+  - "npm install jsdom"
 
 script:
   - "npm test"

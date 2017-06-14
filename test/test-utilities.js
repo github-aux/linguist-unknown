@@ -1,5 +1,8 @@
 'use strict';
 
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 global.jsyaml = require('../src/scripts-min/js-yaml.min.js');
 global.LinguistHighlighter = require('../src/scripts/ling-highlighter.js').LinguistHighlighter;
@@ -7,6 +10,7 @@ var LinguistLoader = require('../src/scripts/ling-loader.js').LinguistLoader;
 
 describe('Loader', function () {
   var utilities = new LinguistLoader.Utilities();
+
   describe('Utilities', function() {
     it('should get the possible filepath correctly', function (done) {
       var location = {
@@ -18,17 +22,43 @@ describe('Loader', function () {
       done();
     });
 
-    it('should refresh table', function(done) {
-      var location = {
-        hostname: "github.com",
-        href: "https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain",
-        pathname: "/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain"
-      };
+    it('should refresh the code table', function(done) {
+      JSDOM.fromURL("https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain").then(dom => {
 
-      // check if it is not breaking
-      utilities.refresh(location, function(langObj, table){
-        done();
-      });
+        var o = Object.prototype;
+        Object.defineProperty(o, "innerText", {
+          get: function jaca() {
+            if (this.innerHTML === undefined)
+              return "";
+            return this.innerHTML;
+          }
+        });
+        
+        global.document = dom.window.document.documentElement;
+        // the comment below is a test for the innerText property
+        /* var table = document.getElementsByClassName("blob-wrapper")[0]
+                              .getElementsByTagName("table")[0];
+        var cells = table.querySelectorAll('tbody td');
+        for (var i = 0; i < cells.length; i++) {
+          var cell = cells[i];
+          if (cell.id.indexOf("LC") !== -1) {
+             console.log(cell.innerText); // ignore GH spa
+          }
+        }*/
+        
+        var location = {
+          hostname: "github.com",
+          href: "https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain",
+          pathname: "/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain"
+        };
+
+        // check if it is not breaking
+        utilities.refresh(location, function(langObj, table) {
+          langObj.should.not.equal(null).and.should.not.equal(undefined);
+          table.should.not.equal(null).and.should.not.equal(undefined);
+          done();
+        });
+      }); 
     });
   });
 });

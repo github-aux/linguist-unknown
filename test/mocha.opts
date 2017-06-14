@@ -1,4 +1,5 @@
 --require should
+--require jsdom
 --require xmlhttprequest
 -R spec
 --ui bdd
