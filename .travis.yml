@@ -2,8 +2,10 @@ language: node_js
 node_js:
   - "7"
   - "6"
-  - "5"
-  - "4"
+
+#  JSDOM does not run on versions 5 and 4 :(
+#  - "5"
+#  - "4"
 
 cache:
   directories:
