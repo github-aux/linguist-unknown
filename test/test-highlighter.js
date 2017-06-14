@@ -176,7 +176,6 @@ describe('HighLighter', function () {
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
           if (cell.id.indexOf("LC") !== -1) {
-            console.log(cell.innerText);
             cell.innerText.should.not.containEql('<span style="color'); 
           }
         }
