@@ -25,5 +25,13 @@ describe('HighLighter', function () {
       done();
     });
   });
+
+  /*describe('', function() {
+    it('should get a partial span tag (opened) with color', function (done) {
+      var span_tag = highlighter.openSpan("#FFFFFF");
+      span_tag.should.equal("<span style=\"color:#FFFFFF;\">");
+      done();
+    });
+  });*/
 });
 

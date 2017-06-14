@@ -70,27 +70,32 @@ var LinguistLoader = (function() {
       return GITHUB_RAW + uri[0] + uri[1].split('/')[0] + '/' + FILENAME;
     };
 
-    Utilities.prototype.refresh = function() {
-      var new_url = window.location.href;
+    Utilities.prototype.refresh = function(location, callback) {
+      var new_url = location.href;
 
-      if (new_url === current_url || !this.isGithub(window.location)) {
+      if (new_url === current_url || !this.isGithub(location)) {
         return;
       }
 
       current_url = new_url;
       if (linguistObj === null) {
         linguistObj = {
-          path: this.getPossibleFilepath(window.location)
+          path: this.getPossibleFilepath(location)
         };
       }
 
-      window.setTimeout(function() {
+      setTimeout(function() {
         var downloadHelper = new DownloadHelper();
         downloadHelper.load(linguistObj.path, function(objs){
           this.tryMatchUrlExtension(current_url, objs, function(langObj){
             var table = document.getElementsByClassName("blob-wrapper")[0]
                               .getElementsByTagName("table")[0];
             new LinguistHighlighter.Highlighter(langObj).draw(table);
+
+            // callback for tests purposes only
+            if (callback) {
+              callback(langObj, table);
+            }
           });
         }.bind(this));
       }.bind(this), 100);
