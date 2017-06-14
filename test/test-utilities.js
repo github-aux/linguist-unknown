@@ -27,13 +27,14 @@ describe('Loader', function () {
 
         var o = Object.prototype;
         Object.defineProperty(o, "innerText", {
-          get: function jaca() {
+          get: function() {
             if (this.innerHTML === undefined)
               return "";
             return this.innerHTML;
-          }
+          },
+          configurable: true
         });
-        
+      
         global.document = dom.window.document.documentElement;
         // the comment below is a test for the innerText property
         /* var table = document.getElementsByClassName("blob-wrapper")[0]

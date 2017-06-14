@@ -14,6 +14,11 @@ var LinguistHighlighter = (function() {
   var Highlighter = (function() {
       var Highlighter = function(langObj) {
           this.langObj = langObj;
+          if (this.langObj && this.langObj.default_color === undefined) {
+              // GitHub default color
+              this.langObj.default_color = '#24292e';
+          }
+
           this.isMultilineComment = false;
       };
 
