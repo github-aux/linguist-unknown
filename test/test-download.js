@@ -24,7 +24,8 @@ describe('DownloadHelper', function () {
 
       objs.Brainfuck.should.have.property('extensions');
       objs.Brainfuck.extensions.should.containDeep([".bf"]);
-      objs.Brainfuck.should.have.property('default_color');
+      // We are testing Brainfuck without the default_color, thus, the test below was wrong
+      // objs.Brainfuck.should.have.property('default_color');
       objs.Brainfuck.should.have.property('grammar');
 
       objs.C.should.have.property('extensions');
