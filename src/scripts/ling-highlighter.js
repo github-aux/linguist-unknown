@@ -14,12 +14,15 @@ var LinguistHighlighter = (function() {
   var Highlighter = (function() {
       var Highlighter = function(langObj) {
           this.langObj = langObj;
+          if (this.langObj && this.langObj.default_color === undefined) {
+              // GitHub default color
+              this.langObj.default_color = '#24292e';
+          }
+
           this.isMultilineComment = false;
       };
 
-      Highlighter.prototype.draw = function() {
-          var table = document.getElementsByClassName("blob-wrapper")[0]
-                              .getElementsByTagName("table")[0];
+      Highlighter.prototype.draw = function(table) {
           var cells = table.querySelectorAll('tbody td');
           for (var i = 0; i < cells.length; i++) {
               var cell = cells[i];
@@ -149,17 +152,22 @@ var LinguistHighlighter = (function() {
 
       Highlighter.prototype.getNumber = function(code, idx, callback) {
           var number = code.substring(idx, code.length)
-                           .match(new RegExp("^[-+]?[0-9]*\.?[0-9]+"))[0];
+                           .match(new RegExp("^[0-9]*[.]?[0-9]+"))[0];
           callback(number, idx, this.langObj);
       };
 
       Highlighter.prototype.getLiteralString = function(code, idx, callback) {
           var pos_str = idx;
-          var str = code[idx];
-          do {
-              idx++;
-              str += code[idx];
-          } while (idx < code.length && code[idx] !== code[pos_str]);
+          var str = code[idx++];
+          while (idx < code.length && code[idx] !== code[pos_str]) {
+              str += code[idx++];
+          }
+
+          if (!code[idx]) {
+            return false;
+          }
+          
+          str += code[idx];
 
           callback(str, pos_str, this.langObj);
       };
@@ -249,8 +257,8 @@ var LinguistHighlighter = (function() {
                       tokens.push(new Token(id, pos, id.length, color_id));
                       i += id.length;
                   });
-              } else if (this.isLiteralString(code[i])){
-                  this.getLiteralString(code, i, function(str, pos, langObj){
+              } else if (this.isLiteralString(code[i])
+                  && this.getLiteralString(code, i, function(str, pos, langObj){
                       var color_string = langObj.default_color;
                       if (langObj.string_color !== undefined) {
                           color_string = langObj.string_color;
@@ -258,7 +266,10 @@ var LinguistHighlighter = (function() {
 
                       tokens.push(new Token(str, pos, str.length, color_string));
                       i += str.length;
-                  });
+                  })){
+
+                  /*do nothing*/ 
+
               } else if (this.isNumber(code[i])) {
                   this.getNumber(code, i, function(number, pos, langObj){
                       var color_number = langObj.default_color;
@@ -334,6 +345,10 @@ var LinguistHighlighter = (function() {
   }());
 
   return {
-    Highlighter: Highlighter
+    Highlighter: Highlighter,
+    Token: Token
   };
 }());
+
+exports.LinguistHighlighter = LinguistHighlighter;
+

@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="#"><img alt="Open Source" src="https://badges.frapsoft.com/os/v2/open-source.svg?v=103" /></a>
-<a href="#"><img alt="Percentage" src="http://progressed.io/bar/100" /></a>
+<a href="https://travis-ci.org/github-aux/linguist-unknown"><img alt="Travis" src="https://travis-ci.org/github-aux/linguist-unknown.svg" /></a>
 <a href="#"><img alt="Badges" src="https://david-dm.org/boennemann/badges/status.svg" /></a>
 <a href="#"><img alt="GPL" src="https://badges.frapsoft.com/os/gpl/gpl.png?v=103" /></a>
 </p>
@@ -71,7 +71,7 @@ Please read the [documentation](#documentation) and check if your YAML is valid 
 1. [Download](#how-can-i-download-and-use-it) and install `Linguist Unknown`.
 2. Add a file named `.linguist.yml` into the root of your GitHub repository to tell `Linguist Unknown` your language(s) grammar(s).
 3. Write your grammar(s) rules. The example below tells `Linguist Unknown` that you have a programming language called `Foo` whose extensions are `.foo` and `.bar`. It also tells that `Foo`'s single linge comment is defined by `//`, whereas its multiline comments are defined by `/*` and `*/`. Last but not least, it defines the color of your tokens i.e. __id_color__ _(identifier color)_, __number_color__. It also helps you to define the color groups of your grammar's `keywords`, `operators` and customizable `regexes`
-```
+```YAML
 Foo:
   extensions:
     - ".foo"
@@ -110,7 +110,7 @@ Foo:
 
 ##### Brain Language
 
-```
+```YAML
 Brain:
   extensions:
     - ".br"
@@ -163,7 +163,7 @@ Brain:
 
 ##### Test
 
-```
+```YAML
 Test:
   extensions:
     - ".test"
@@ -204,136 +204,135 @@ Test:
 
 ##### Multiple languages in same repo
 It's simple, in your `.linguist.yml`:
-```
+```YAML
 Foo:
   extensions:
     - ".foo"
-  ... other rules
+  # ... other rules
 
 Bar:
   extensions:
     - ".bar"
-  ... other rules
+  # ... other rules
 ```
 
 ##### extensions
 List of extensions for your language.
-```
-  extensions:
-    - ".ext1"
-    - ".ext2"
+```YAML
+extensions:
+  - ".ext1"
+  - ".ext2"
 ```
 
 ##### default_color
 The default color for your language. All tokens with `undefined` color will have this color. If this color is not defined, it will use `GitHub`'s default color: `#24292e`
-```
-  default_color: "#F00BAF"
+```YAML
+default_color: "#F00BAF"
 ```
 
 ##### id_color
 The color for your language's `identifiers`. If this color is `undefined`, it will user the property `default_color` instead.
-```
-  id_color: "#F00BAF"
+```YAML
+id_color: "#F00BAF"
 ```
 
 ##### number_color
 The color for your language's `numbers`. If this color is `undefined`, it will user the property `default_color` instead.
-```
-  number_color: "#F00BAF"
+```YAML
+number_color: "#F00BAF"
 ```
 
 ##### string_color
 The color for your language's `strings`. If this color is `undefined`, it will user the property `default_color` instead.
-```
-  string_color: "#F00BAF"
+```YAML
+string_color: "#F00BAF"
 ```
 
 ##### comment_color
 The color for your language's `comments`. If this color is `undefined`, it will user the property `default_color` instead.
-```
-  string_color: "#F00BAF"
+```YAML
+comment_color: "#F00BAF"
 ```
 
 ##### single\_line\_comment
 The __lexeme__ for your single line comments, such as `//`, `#` and others
-```
-  single_line_comment: "//"
+```YAML
+single_line_comment: "//"
 ```
 
 ##### begin\_multiline\_comment
 The __lexeme__ for the begin of your multiline comments, such as `/*`, `{` and others
-```
-  begin_multiline_comment: "/*"
+```YAML
+begin_multiline_comment: "/*"
 ```
 
 ##### end\_multiline\_comment
 The __lexeme__ for the end of your multiline comments, such as `*/`, `}` and others
-```
-  begin_multiline_comment: "*/"
+```YAML
+end_multiline_comment: "*/"
 ```
 
 ##### grammar
 Represents a list of color rules for your `keywords`, `operators` and others. Example
-```
-  grammar:
-    - color: "#F00BAF"
-      keywords:
-        - "if"
-        - "while"
-        - "for"
-    - color: "#333333"
-      keywords:
-        - "int"
-        - "float"
-      operators:
-        - "==="
-        - "!=="
-        - "=="
-    - color: "FF0000"
-      regexes:
-        - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
-          modifier: ""
-        - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
-          modifier: "i"
+```YAML
+grammar:
+  - color: "#F00BAF"
+    keywords:
+      - "if"
+      - "while"
+      - "for"
+  - color: "#333333"
+    keywords:
+      - "int"
+      - "float"
+    operators:
+      - "==="
+      - "!=="
+      - "=="
+  - color: "FF0000"
+    regexes:
+      - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
+        modifier: ""
+      - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
+        modifier: "i"
 ```
 
 ###### color
 Defines the `color group` for your `keywords`, `operators` and others (such as `regexes`). If `undefined`, it will user the property default_color instead.
-```
-  grammar:
-    - color: "#F00BAF"
-      ...
+```YAML
+grammar:
+  - color: "#F00BAF"
 ```
 
 ###### keywords
 Defines a list of `keywords` for a grammar color group.
-```
-  grammar:
-    - color: "#F00BAF"
-      keywords:
-        - "if"
-        - "else"
+```YAML
+grammar:
+  - color: "#F00BAF"
+    keywords:
+      - "if"
+      - "else"
 ```
 
 ###### operators
 Defines a list of `operators` for a grammar color group.
-```
-  grammar:
-    - color: "#F00BAF"
-      operators:
-        - "=="
-        - "!="
-        - ">"
+```YAML
+grammar:
+  - color: "#F00BAF"
+    operators:
+      - "=="
+      - "!="
+      - ">"
 ```
 
 ###### regexes
 Defines a list of `regexes` for a grammar color group. The `regexes` properties can be used as a property that may identify custom `lexemes` not included by `Linguist Unknown`. For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
-```
-  grammar:
-    - color: "#FF0000"
-      regexes:
-        - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
-          modifiers: ""
+```YAML
+grammar:
+  - color: "#FF0000"
+    regexes:
+      - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
+        modifiers: ""
 ```
 
 ### Contributing

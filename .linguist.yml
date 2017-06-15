@@ -73,7 +73,6 @@ Brain:
 Brainfuck:
   extensions:
     - ".bf"
-  default_color: "#969896"
   
   grammar:
     - color: "#BF211E"
