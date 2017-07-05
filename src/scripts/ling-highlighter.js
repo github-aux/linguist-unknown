@@ -72,6 +72,7 @@ var LinguistHighlighter = (function() {
               neighborDefault = false;
             }
 
+            // check if neighbor has same color
             if(token_idx < tokens.length &&
               next_pos === tokens[token_idx].pos &&
               tokens[token_idx].color === token_color) {
@@ -81,6 +82,13 @@ var LinguistHighlighter = (function() {
               neighborSameColor = true;
             } else {
               neighborSameColor = false;
+            }
+
+            // finding extra spaces in order to concatenate them to the color
+            // once they do not interfer in the token itself
+            while(code[next_pos] === " ") {
+              new_code += " ";
+              next_pos++;
             }
           }
 
