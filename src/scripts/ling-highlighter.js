@@ -157,9 +157,56 @@ var LinguistHighlighter = (function() {
     };
 
     highlighter.prototype.getNumber = function(code, idx, callback) {
-      var number = code.substring(idx, code.length)
-                       .match(new RegExp("^[0-9]*[.]?[0-9]+"))[0];
-      callback(number, idx, this.langObj);
+      var pos_id = idx;
+      var number = code[idx];
+      idx++;
+      var next_int = this.getNextInt(code, idx);
+      number += next_int.value;
+      idx = next_int.idx;
+
+      if (idx + 1 < code.length
+       && code[idx] === '.'
+       && this.isNumber(code[idx+1])) {
+        number += code[idx];
+        number += code[idx+1];
+        idx += 2;
+        next_int = this.getNextInt(code, idx);
+        number += next_int.value;
+        idx = next_int.idx;
+      }
+
+      if (idx < code.length && code[idx] === 'e') {
+        if (idx + 1 < code.length && this.isNumber(code[idx+1])) {
+          number += code[idx];
+          number += code[idx+1];
+          idx += 2;
+          next_int = this.getNextInt(code, idx);
+          number += next_int.value;
+          idx = next_int.idx;
+        } else if (idx + 2 < code.length
+                   && (code[idx+1] === '+' || code[idx+1] === '-')
+                   && this.isNumber(code[idx+2])) {
+         number += code[idx];
+         number += code[idx+1];
+         number += code[idx+2];
+         idx += 3;
+         next_int = this.getNextInt(code, idx);
+         number += next_int.value;
+         idx = next_int.idx;
+        }
+      }
+
+      callback(number, pos_id, this.langObj);
+    };
+
+    highlighter.prototype.getNextInt = function(code, idx) {
+      var number = "";
+      while (idx < code.length && this.isNumber(code[idx])) {
+        number += code[idx];
+        idx++;
+      }
+
+      return { value: number, idx: idx };
     };
 
     highlighter.prototype.getLiteralString = function(code, idx, callback) {
