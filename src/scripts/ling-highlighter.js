@@ -112,11 +112,14 @@ var LinguistHighlighter = (function() {
     };
 
     highlighter.prototype.isId = function(char, beginningId) {
-      return /[A-Za-z_]/.test(char) || !beginningId && this.isNumber(char);
+      return (char >= 'a' && char <= 'z')
+          || (char >= 'A' && char <= 'Z')
+          ||  char === '_'
+          || (!beginningId && this.isNumber(char));
     };
 
     highlighter.prototype.isNumber = function(char) {
-      return /[0-9]/.test(char);
+      return char >= '0' && char <= '9';
     };
 
     highlighter.prototype.isLiteralString = function(char) {
