@@ -11,7 +11,7 @@ C:
   single_line_comment: "//"
   begin_multiline_comment: "/*"
   end_multiline_comment: "*/"
-  
+
   grammar:
     - color: "#a71d5d"
       keywords:
@@ -19,7 +19,7 @@ C:
         - "void"
         - "int"
         - "float"
-    
+
     - color: "#FF1053"
       keywords:
         - "printf"
@@ -32,7 +32,7 @@ Brain:
     - ".br"
     - ".brain"
   default_color: "#969896"
-  
+
   grammar:
     - color: "#a71d5d"
       operators:
@@ -41,7 +41,7 @@ Brain:
         - "^"
         - "&lt;"
         - "&gt;"
-        
+
     - color: "#333333"
       operators:
         - "["
@@ -52,7 +52,7 @@ Brain:
         - ":"
         - ";"
         - "!"
-        
+
     - color: "#0086b3"
       operators:
         - "+"
@@ -61,7 +61,7 @@ Brain:
         - "/"
         - "%"
         - "_"
-    
+
     - color: "#795da3"
       operators:
         - "."
@@ -73,7 +73,7 @@ Brain:
 Brainfuck:
   extensions:
     - ".bf"
-  
+
   grammar:
     - color: "#BF211E"
       operators:
@@ -81,17 +81,17 @@ Brainfuck:
         - "<"
         - "&lt;"
         - "&gt;"
-        
+
     - color: "#B744B8"
       operators:
         - "["
         - "]"
-        
+
     - color: "#69A197"
       operators:
         - "+"
         - "-"
-    
+
     - color: "#F9DC5C"
       operators:
         - "."
@@ -109,20 +109,19 @@ Test:
   single_line_comment: "//"
   begin_multiline_comment: "/*"
   end_multiline_comment: "*/"
-  
+
   grammar:
     - color: "#72EEBB"
       keywords:
         - "for"
         - "while"
       regexes:
-        - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
+        - regex: "(&|amp;)\/[^\/]*\/[gmixXsuUAJD]*"
           modifier: ""
-    
+
     - color: "#FF00FF"
       keywords:
         - "if"
         - "else"
         - "switch"
         - "let"
-

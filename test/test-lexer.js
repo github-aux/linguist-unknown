@@ -108,6 +108,34 @@ describe("Lexer", function() {
       number.should.equal("111111");
     });
 
+    highlighter.getNumber("111119.2a******", 0, function(number, pos, langObj) {
+      number.should.equal("111119.2");
+    });
+
+    highlighter.getNumber("++++++  2.e3  ******", 8, function(number, pos, langObj) {
+      number.should.equal("2");
+    });
+
+    highlighter.getNumber("2e3", 0, function(number, pos, langObj) {
+      number.should.equal("2e3");
+    });
+
+    highlighter.getNumber("2.0e3", 0, function(number, pos, langObj) {
+      number.should.equal("2.0e3");
+    });
+
+    highlighter.getNumber("***111119.2e-10a******", 3, function(number, pos, langObj) {
+      number.should.equal("111119.2e-10");
+    });
+
+    highlighter.getNumber("2e+2", 0, function(number, pos, langObj) {
+      number.should.equal("2e+2");
+    });
+
+    highlighter.getNumber("///// 90001e******", 6, function(number, pos, langObj) {
+      number.should.equal("90001");
+    });
+
     done();
   });
 
