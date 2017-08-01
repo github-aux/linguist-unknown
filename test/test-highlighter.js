@@ -129,7 +129,7 @@ describe('HighLighter', function () {
         pos: 0,
         size: 93,
         color: '#969896'
-      }]);      
+      }]);
 
       done();
     });
@@ -138,12 +138,12 @@ describe('HighLighter', function () {
       var h = new Highlighter(langObjs.Test);
       var code = "/* comment */  ==== if huhdufd let fdjijfdf == !!!!! while for let for for for rfrereer ===";
       var tks = h.lexer(code);
-      h.paint(tks, code).should.equal('<span style="color:#969896;">/* comment */</span><span style="color:#FF8272;">  ==== </span><span style="color:#FF00FF;">if</span><span style="color:#FF8272;"> </span><span style="color:#FF99FF;">huhdufd</span><span style="color:#FF8272;"> </span><span style="color:#FF00FF;">let</span><span style="color:#FF8272;"> </span><span style="color:#FF99FF;">fdjijfdf</span><span style="color:#FF8272;"> == !!!!! </span><span style="color:#72EEBB;">while</span><span style="color:#FF8272;"> </span><span style="color:#72EEBB;">for</span><span style="color:#FF8272;"> </span><span style="color:#FF00FF;">let</span><span style="color:#FF8272;"> </span><span style="color:#72EEBB;">for</span><span style="color:#FF8272;"> </span><span style="color:#72EEBB;">for</span><span style="color:#FF8272;"> </span><span style="color:#72EEBB;">for</span><span style="color:#FF8272;"> </span><span style="color:#FF99FF;">rfrereer</span><span style="color:#FF8272;"> ===</span>');
+      h.paint(tks, code).should.equal('<span style="color:#969896;">/* comment */  </span><span style="color:#FF8272;">==== </span><span style="color:#FF00FF;">if </span><span style="color:#FF99FF;">huhdufd </span><span style="color:#FF00FF;">let </span><span style="color:#FF99FF;">fdjijfdf </span><span style="color:#FF8272;">== !!!!! </span><span style="color:#72EEBB;">while </span><span style="color:#72EEBB;">for </span><span style="color:#FF00FF;">let </span><span style="color:#72EEBB;">for </span><span style="color:#72EEBB;">for </span><span style="color:#72EEBB;">for </span><span style="color:#FF99FF;">rfrereer </span><span style="color:#FF8272;">===</span>');
 
       var h2 = new Highlighter(langObjs.C);
       var code2 = 'void b_debug(int idx, int *cells) {printf("Index Pointer: %d Value at Index Pointer: %d\n",idx,cells[idx]);';
       var tks2 = h2.lexer(code2);
-      h2.paint(tks2, code2).should.equal('<span style="color:#a71d5d;">void</span><span style="color:#24292e;"> </span><span style="color:#7b9c0e;">b_debug</span><span style="color:#24292e;">(</span><span style="color:#a71d5d;">int</span><span style="color:#24292e;"> </span><span style="color:#7b9c0e;">idx</span><span style="color:#24292e;">, </span><span style="color:#a71d5d;">int</span><span style="color:#24292e;"> *</span><span style="color:#7b9c0e;">cells</span><span style="color:#24292e;">) {</span><span style="color:#FF1053;">printf</span><span style="color:#24292e;">(</span><span style="color:#8B9EB7;">"Index Pointer: %d Value at Index Pointer: %d\n"</span><span style="color:#24292e;">,</span><span style="color:#7b9c0e;">idx</span><span style="color:#24292e;">,</span><span style="color:#7b9c0e;">cells</span><span style="color:#24292e;">[</span><span style="color:#7b9c0e;">idx</span><span style="color:#24292e;">]);</span>');
+      h2.paint(tks2, code2).should.equal('<span style="color:#a71d5d;">void </span><span style="color:#7b9c0e;">b_debug</span><span style="color:#24292e;">(</span><span style="color:#a71d5d;">int </span><span style="color:#7b9c0e;">idx</span><span style="color:#24292e;">, </span><span style="color:#a71d5d;">int </span><span style="color:#24292e;">*</span><span style="color:#7b9c0e;">cells</span><span style="color:#24292e;">) {</span><span style="color:#FF1053;">printf</span><span style="color:#24292e;">(</span><span style="color:#8B9EB7;">"Index Pointer: %d Value at Index Pointer: %d\n"</span><span style="color:#24292e;">,</span><span style="color:#7b9c0e;">idx</span><span style="color:#24292e;">,</span><span style="color:#7b9c0e;">cells</span><span style="color:#24292e;">[</span><span style="color:#7b9c0e;">idx</span><span style="color:#24292e;">]);</span>');
 
       var h3 = new Highlighter(langObjs.Brain);
       var code3 = '++++>>>>{?Blah----:jaca;}#';
@@ -176,7 +176,7 @@ describe('HighLighter', function () {
         for (var i = 0; i < cells.length; i++) {
           var cell = cells[i];
           if (cell.id.indexOf("LC") !== -1) {
-            cell.innerText.should.not.containEql('<span style="color'); 
+            cell.innerText.should.not.containEql('<span style="color');
           }
         }
 
@@ -189,10 +189,9 @@ describe('HighLighter', function () {
           }
         }
 
-      
+
         done();
       });
     });
   });
 });
-
