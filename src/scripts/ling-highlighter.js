@@ -1,4 +1,5 @@
 var LinguistHighlighter = (function() {
+  'use strict';
 
   var Token = (function() {
     return function(value, pos, size, color) {
