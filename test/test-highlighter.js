@@ -16,9 +16,11 @@ describe('HighLighter', function () {
        id_color: '#7b9c0e',
        number_color: '#745296',
        string_color: '#8B9EB7',
-       single_line_comment: '//',
-       begin_multiline_comment: '/*',
-       end_multiline_comment: '*/',
+       comment: {
+         single_line: '//',
+         begin_multiline: '/*',
+         end_multiline: '*/'
+       },
        grammar:
         [ { color: '#a71d5d',
             keywords: [ 'include', 'void', 'int', 'float' ] },
@@ -49,9 +51,11 @@ describe('HighLighter', function () {
        id_color: '#FF99FF',
        number_color: '#FF6600',
        string_color: '#333300',
-       single_line_comment: '//',
-       begin_multiline_comment: '/*',
-       end_multiline_comment: '*/',
+       comment: {
+         single_line: '//',
+         begin_multiline: '/*',
+         end_multiline: '*/'
+       },
        grammar:
         [ { color: '#72EEBB',
             keywords: [ 'for', 'while' ],
