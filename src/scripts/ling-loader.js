@@ -1,10 +1,10 @@
 var LinguistLoader = (function() {
   'use strict';
 
-  var GITHUB_HOST = "github.com";
-  var GITHUB_URL_FILE = "blob/";
-  var GITHUB_RAW = "https://raw.githubusercontent.com";
-  var FILENAME = ".linguist.yml";
+  const GITHUB_HOST = "github.com";
+  const GITHUB_URL_FILE = "blob/";
+  const GITHUB_RAW = "https://raw.githubusercontent.com";
+  const FILENAME = ".linguist.yml";
 
   var linguistObj = null;
   var current_url = "";
@@ -89,7 +89,7 @@ var LinguistLoader = (function() {
         downloadHelper.load(linguistObj.path, function(objs){
           this.tryMatchUrlExtension(current_url, objs, function(langObj){
             var table = document.getElementsByClassName("blob-wrapper")[0]
-                              .getElementsByTagName("table")[0];
+                                .getElementsByTagName("table")[0];
             new LinguistHighlighter.Highlighter(langObj).draw(table);
 
             // callback for tests purposes only
@@ -111,4 +111,3 @@ var LinguistLoader = (function() {
 }());
 
 exports.LinguistLoader = LinguistLoader;
-

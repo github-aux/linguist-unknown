@@ -28,7 +28,9 @@ If we find an issue that's related, we will reference it and close your issue, s
 
 ### Branches
 -  `chrome`: Stable code for the Linguist Unknown Google Chrome extension.
--  `chrome-dev`: Development code for the _chrome branch_.
+-  `development`: Development code for the _chrome branch_.
+
+#### In the future:
 -  `firefox`: Stable code for the Linguist Unknown Mozilla Firefox extension/add-on.
 -  `firefox-dev`: Development code for the _firefox branch_.
 

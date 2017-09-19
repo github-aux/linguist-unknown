@@ -1,9 +1,9 @@
 (function(doc, browser){
   'use strict';
   if (undefined === window.exports) {
-    window.exports = new Object();
+    window.exports = {};
   }
-  
+
   doc.addEventListener('DOMContentLoaded', function() {
     browser.storage.sync.get('shouldWork', function(items) {
       if (items.shouldWork) {
