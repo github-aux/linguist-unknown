@@ -11,9 +11,9 @@ C:
   string_color: "#8B9EB7"
 
   comment:
-    - single_line: "//"
-    - begin_multiline: "/*"
-    - end_multiline: "*/"
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
 
   grammar:
     - color: "#a71d5d"
@@ -113,9 +113,9 @@ Test:
   string_color: "#333300"
   
   comment:
-    - single_line: "//"
-    - begin_multiline: "/*"
-    - end_multiline: "*/"
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
 
   grammar:
     - color: "#72EEBB"
@@ -132,3 +132,4 @@ Test:
         - "else"
         - "switch"
         - "let"
+
