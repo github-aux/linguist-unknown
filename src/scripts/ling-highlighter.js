@@ -245,6 +245,18 @@ var LinguistHighlighter = (function() {
     };
 
     highlighter.prototype.lexer = function(code) {
+      var begin_multiline_comment = this.langObj.comment !== undefined   ?
+                                    this.langObj.comment.begin_multiline :
+                                    undefined;
+
+      var end_multiline_comment   = this.langObj.comment !== undefined ?
+                                    this.langObj.comment.end_multiline :
+                                    undefined;
+
+      var single_line_comment     = this.langObj.comment !== undefined ?
+                                    this.langObj.comment.single_line   :
+                                    undefined;
+
       var tokens = Array();
       var i = 0;
       while (i < code.length) {
@@ -255,14 +267,14 @@ var LinguistHighlighter = (function() {
         else if (
           this.isMultilineComment ||
           this.startsWith(
-            this.langObj.begin_multiline_comment,
+            begin_multiline_comment,
             code, i
           )
         ) {
           // refactory it
           this.isMultilineComment = true;
           this.getMultilineComment(
-            this.langObj.end_multiline_comment,
+            end_multiline_comment,
             code,
             i,
             function(mult_comment, pos, lookingFor, highlighter) {
@@ -277,7 +289,7 @@ var LinguistHighlighter = (function() {
               i += mult_comment.length;
             }
           );
-        } else if (this.startsWith(this.langObj.single_line_comment, code, i)) {
+        } else if (this.startsWith(single_line_comment, code, i)) {
           var comment = code.substring(i, code.length);
           var color_comment = this.langObj.default_color;
           if (this.langObj.comment_color !== undefined) {

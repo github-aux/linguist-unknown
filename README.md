@@ -81,9 +81,11 @@ Foo:
   number_color: "#FF6600"
   string_color: "#333300"
   comment_color: "#CCF5AC"
-  single_line_comment: "//"
-  begin_multiline_comment: "/*"
-  end_multiline_comment: "*/"
+
+  comment:
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
 
   grammar:
     - color: "#72EEBB"
@@ -115,6 +117,7 @@ Brain:
   extensions:
     - ".br"
     - ".brain"
+
   default_color: "#969896"
 
   grammar:
@@ -172,9 +175,11 @@ Test:
   id_color: "#FF99FF"
   number_color: "#FF6600"
   string_color: "#333300"
-  single_line_comment: "//"
-  begin_multiline_comment: "/*"
-  end_multiline_comment: "*/"
+  
+  comment:
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
 
   grammar:
     - color: "#72EEBB"
@@ -254,22 +259,30 @@ The color for your language's `comments`. If this color is `undefined`, it will 
 comment_color: "#F00BAF"
 ```
 
-##### single\_line\_comment
+#### comment
+Group of __lexemes__ related to your comment tokens.
+
+##### single\_line
 The __lexeme__ for your single line comments, such as `//`, `#` and others
 ```YAML
-single_line_comment: "//"
+comment:
+  single_line: "//"
+  ...
 ```
 
-##### begin\_multiline\_comment
+##### begin\_multiline
 The __lexeme__ for the begin of your multiline comments, such as `/*`, `{` and others
 ```YAML
-begin_multiline_comment: "/*"
+comment:
+  begin_multiline: "/*"
+  ...
 ```
 
-##### end\_multiline\_comment
+##### end\_multiline
 The __lexeme__ for the end of your multiline comments, such as `*/`, `}` and others
 ```YAML
-end_multiline_comment: "*/"
+comment:
+  end_multiline: "*/"
 ```
 
 ##### grammar
