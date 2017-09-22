@@ -55,7 +55,7 @@ We believe that all languages should be highlighted on GitHub; just the way it s
 
 ### How can I download and use it?
 __Two Simple Steps__:
-- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the Firefox Plugin (still in __TODO__, [accepting pull requests](#CONTRIBUTING.md)).
+- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the Firefox Plugin (still in __TODO__, [accepting pull requests](CONTRIBUTING.md)).
 - Make sure it is active.
 
 <img alt="On/Off" src="./img/on_off.gif" />
