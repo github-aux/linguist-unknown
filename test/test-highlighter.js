@@ -11,25 +11,25 @@ describe('HighLighter', function () {
   var langObjs = {
     C:
      { extensions: [ '.c' ],
-       default_color: '#24292e',
-       comment_color: '#969896',
-       id_color: '#7b9c0e',
-       number_color: '#745296',
-       string_color: '#8B9EB7',
+       default: { color: '#24292e' } ,
+       identifier: { color: '#7b9c0e' },
+       number: { color: '#745296' },
+       string: { color: '#8B9EB7' },
        comment: {
+         color: '#969896',
          single_line: '//',
          begin_multiline: '/*',
          end_multiline: '*/'
        },
-       grammar:
+       group:
         [ { color: '#a71d5d',
             keywords: [ 'include', 'void', 'int', 'float' ] },
           { color: '#FF1053',
             keywords: [ 'printf', 'putchar', 'getchar' ] } ] },
     Brain:
      { extensions: [ '.br', '.brain' ],
-       default_color: '#969896',
-       grammar:
+       default: { color: '#969896' },
+       group:
         [ { color: '#a71d5d',
             operators: [ '>', '<', '^', '&lt;', '&gt;' ] },
           { color: '#333333',
@@ -39,24 +39,24 @@ describe('HighLighter', function () {
           { color: '#795da3', operators: [ '.', ',', '$', '#' ] } ] },
     Brainfuck:
      { extensions: [ '.bf' ],
-       grammar:
+       group:
         [ { color: '#BF211E', operators: [ '>', '<', '&lt;', '&gt;' ] },
           { color: '#B744B8', operators: [ '[', ']' ] },
           { color: '#69A197', operators: [ '+', '-' ] },
           { color: '#F9DC5C', operators: [ '.', ',' ] } ] },
     Test:
      { extensions: [ '.test' ],
-       default_color: '#FF8272',
-       comment_color: '#969896',
-       id_color: '#FF99FF',
-       number_color: '#FF6600',
-       string_color: '#333300',
+       default: { color: '#FF8272' },
+       identifier: { color: '#FF99FF' },
+       number: { color: '#FF6600' },
+       string: { color: '#333300' },
        comment: {
+         color: '#969896', 
          single_line: '//',
          begin_multiline: '/*',
          end_multiline: '*/'
        },
-       grammar:
+       group:
         [ { color: '#72EEBB',
             keywords: [ 'for', 'while' ],
             regexes: [ { regex: '&(amp;)/[^/]*/([\\S]?)*', modifier: '' } ] },

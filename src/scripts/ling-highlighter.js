@@ -1,6 +1,21 @@
 var LinguistHighlighter = (function() {
   'use strict';
 
+  const GITHUB_DEFAULT_COLOR = '#24292e';
+  const DEFAULT_COLOR_KEY    = 'default.color';
+
+  // helper in checking nested properties with keypath
+  var objPrototype = Object.prototype;
+  Object.defineProperty(objPrototype, "has", {
+    get : function(key) {
+      return function(key) { 
+        return key.split(".").reduce(function(o, x) {
+          return (o === undefined || typeof o === undefined || o === null) ? o : o[x];
+        }, this);
+    }},
+    configurable: false
+  });
+
   var Token = (function() {
     return function(value, pos, size, color) {
       this.value = value;
@@ -13,9 +28,9 @@ var LinguistHighlighter = (function() {
   var Highlighter = (function() {
     var highlighter = function(langObj) {
       this.langObj = langObj;
-      if (this.langObj && this.langObj.default_color === undefined) {
+      if (this.langObj && this.langObj.has(DEFAULT_COLOR_KEY) === undefined) {
         // GitHub default color
-        this.langObj.default_color = '#24292e';
+        this.langObj.default.color = GITHUB_DEFAULT_COLOR;
       }
 
       this.isMultilineComment = false;
@@ -34,7 +49,7 @@ var LinguistHighlighter = (function() {
 
     highlighter.prototype.paint = function(tokens, code) {
       if (tokens.length === 0) {
-        return this.getSpan(code, this.langObj.default_color);
+        return this.getSpan(code, this.langObj.default.color);
       }
 
       var new_code = "";
@@ -45,11 +60,11 @@ var LinguistHighlighter = (function() {
         if (token_idx < tokens.length &&
           next_pos < tokens[token_idx].pos) {
           new_code += this.getSpan(code.substring(next_pos,
-            tokens[token_idx].pos), this.langObj.default_color);
+            tokens[token_idx].pos), this.langObj.default.color);
           next_pos = tokens[token_idx].pos;
         } else if(token_idx === tokens.length) {
           new_code += this.getSpan(code.substring(next_pos,
-            code.length), this.langObj.default_color);
+            code.length), this.langObj.default.color);
           next_pos = code.length;
         } else {
           var token_color = tokens[token_idx].color
@@ -62,7 +77,7 @@ var LinguistHighlighter = (function() {
           var neighborSameColor = true;
 
           while(neighborDefault || neighborSameColor) {
-            if(token_color === this.langObj.default_color &&
+            if(token_color === this.langObj.default.color &&
               token_idx < tokens.length &&
               next_pos < tokens[token_idx].pos) {
               new_code += code.substring(next_pos,
@@ -245,17 +260,9 @@ var LinguistHighlighter = (function() {
     };
 
     highlighter.prototype.lexer = function(code) {
-      var begin_multiline_comment = this.langObj.comment !== undefined   ?
-                                    this.langObj.comment.begin_multiline :
-                                    undefined;
-
-      var end_multiline_comment   = this.langObj.comment !== undefined ?
-                                    this.langObj.comment.end_multiline :
-                                    undefined;
-
-      var single_line_comment     = this.langObj.comment !== undefined ?
-                                    this.langObj.comment.single_line   :
-                                    undefined;
+      var begin_multiline_comment = this.langObj.has('comment.begin_multiline');
+      var end_multiline_comment   = this.langObj.has('comment.end_multiline');
+      var single_line_comment     = this.langObj.has('comment.single_line');
 
       var tokens = Array();
       var i = 0;
@@ -279,9 +286,9 @@ var LinguistHighlighter = (function() {
             i,
             function(mult_comment, pos, lookingFor, highlighter) {
               highlighter.isMultilineComment = lookingFor;
-              var color_comment = highlighter.langObj.default_color;
-              if (highlighter.langObj.comment_color !== undefined) {
-                color_comment = highlighter.langObj.comment_color;
+              var color_comment = highlighter.langObj.default.color;
+              if (highlighter.langObj.has('comment.color') !== undefined) {
+                color_comment = highlighter.langObj.comment.color;
               }
 
               tokens.push(new Token(mult_comment,
@@ -291,18 +298,18 @@ var LinguistHighlighter = (function() {
           );
         } else if (this.startsWith(single_line_comment, code, i)) {
           var comment = code.substring(i, code.length);
-          var color_comment = this.langObj.default_color;
-          if (this.langObj.comment_color !== undefined) {
-            color_comment = this.langObj.comment_color;
+          var color_comment = this.langObj.default.color;
+          if (this.langObj.has('comment.color') !== undefined) {
+            color_comment = this.langObj.comment.color;
           }
 
           tokens.push(new Token(comment, i, comment.length, color_comment));
           i += comment.length;
         } else if (this.isId(code[i], true)) {
           this.getId(code, i, function(id, pos, langObj){
-            var color_id = langObj.default_color;
+            var color_id = langObj.default.color;
             var not_found = true;
-            langObj.grammar.every(function(keys) {
+            langObj.group.every(function(keys) {
               if (keys.keywords !== undefined) {
                 keys.keywords.every(function(keyObj) {
                   if (keyObj.valueOf() === id.valueOf()) {
@@ -319,7 +326,7 @@ var LinguistHighlighter = (function() {
               return not_found;
             });
 
-            if (not_found && langObj.id_color !== undefined) {
+            if (not_found && langObj.has('identifier.color') !== undefined) {
               color_id = langObj.id_color;
             }
 
@@ -328,9 +335,9 @@ var LinguistHighlighter = (function() {
           });
         } else if (this.isLiteralString(code[i])
           && this.getLiteralString(code, i, function(str, pos, langObj){
-            var color_string = langObj.default_color;
-            if (langObj.string_color !== undefined) {
-              color_string = langObj.string_color;
+            var color_string = langObj.default.color;
+            if (langObj.has('string.color') !== undefined) {
+              color_string = langObj.string.color;
             }
 
             tokens.push(new Token(str, pos, str.length, color_string));
@@ -339,9 +346,9 @@ var LinguistHighlighter = (function() {
           /*do nothing*/
         } else if (this.isNumber(code[i])) {
           this.getNumber(code, i, function(number, pos, langObj){
-            var color_number = langObj.default_color;
-            if (langObj.number_color !== undefined) {
-              color_number = langObj.number_color;
+            var color_number = langObj.default.color;
+            if (langObj.has('number.color') !== undefined) {
+              color_number = langObj.number.color;
             }
 
             tokens.push(new Token(number,
@@ -354,7 +361,7 @@ var LinguistHighlighter = (function() {
           var still_looking_for = true;
           var highlighter = this;
           // check if it is operator or match any regex
-          this.langObj.grammar.every(function(obj){
+          this.langObj.group.every(function(obj){
             if (obj.operators !== undefined) {
               obj.operators.every(function(operator){
                 if (highlighter.startsWith(operator,
@@ -399,7 +406,7 @@ var LinguistHighlighter = (function() {
             return still_looking_for;
           });
 
-          // we don't have any grammar for this object,
+          // we don't have any grammar or group for this object,
           // so we ignore it and go to the next one
           if (still_looking_for) {
             i++;
