@@ -25,19 +25,24 @@ See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
 - [Documentation](#documentation)
     - [Multiple Languages](#multiple-languages-in-same-repo)
     - [extensions](#extensions)
-    - [default_color](#default_color)
-    - [id_color](#id_color)
-    - [number_color](#number_color)
-    - [string_color](#string_color)
-    - [comment_color](#comment_color)
-    - [single_line_comment](#single_line_comment)
-    - [begin_multiline_comment](#begin_multiline_comment)
-    - [end_multiline_comment](#end_multiline_comment)
-    - [grammar](#grammar)
-      - [color](#color)
-      - [keywords](#keywords)
-      - [operators](#operators)
-      - [regexes](#regexes)
+    - [default](#default)
+      - [color](#defaultcolor)
+    - [identifier](#identifier)
+      - [color](#identifiercolor)
+    - [number](#number)
+      - [color](#numbercolor)
+    - [string](#string)
+      - [color](#stringcolor)
+    - [comment](#comment)
+      - [color](#commentcolor)
+      - [single_line](#commentsingle_line)
+      - [begin_multiline](#commentbegin_multiline)
+      - [end_multiline](#commentend_multiline)
+    - [group](#group)
+      - [color](#groupcolor)
+      - [keywords](#groupkeywords)
+      - [operators](#groupoperators)
+      - [regexes](#groupregexes)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -50,7 +55,7 @@ We believe that all languages should be highlighted on GitHub; just the way it s
 
 ### How can I download and use it?
 __Two Simple Steps__:
-- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the [Firefox Plugin](#) (on hold).
+- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the Firefox Plugin (still in __TODO__, [accepting pull requests](CONTRIBUTING.md)).
 - Make sure it is active.
 
 <img alt="On/Off" src="./img/on_off.gif" />
@@ -70,24 +75,32 @@ Please read the [documentation](#documentation) and check if your YAML is valid 
 ### How to highlight my language(s)?
 1. [Download](#how-can-i-download-and-use-it) and install `Linguist Unknown`.
 2. Add a file named `.linguist.yml` into the root of your GitHub repository to tell `Linguist Unknown` your language(s) grammar(s).
-3. Write your grammar(s) rules. The example below tells `Linguist Unknown` that you have a programming language called `Foo` whose extensions are `.foo` and `.bar`. It also tells that `Foo`'s single linge comment is defined by `//`, whereas its multiline comments are defined by `/*` and `*/`. Last but not least, it defines the color of your tokens i.e. __id_color__ _(identifier color)_, __number_color__. It also helps you to define the color groups of your grammar's `keywords`, `operators` and customizable `regexes`
+3. Write your grammar(s) rules. The example below tells `Linguist Unknown` that you have a programming language called `Foo` whose extensions are `.foo` and `.bar`. It also tells that `Foo`'s single linge comment is defined by `//`, whereas its multiline comments are defined by `/*` and `*/`. Last but not least, it defines the color of your tokens i.e. __identifier.color__, __number.color__. It also helps you to define the color groups of your grammar's `keywords`, `operators` and customizable `regexes`
 ```YAML
 Foo:
   extensions:
     - ".foo"
     - ".bar"
-  default_color: "#808A9F"
-  id_color: "#333333"
-  number_color: "#FF6600"
-  string_color: "#333300"
-  comment_color: "#CCF5AC"
+
+  default:
+    color: "#808A9F"
+
+  identifier:
+    color: "#333333"
+
+  number:
+    color: "#FF6600"
+
+  string:
+    color: "#333300"
 
   comment:
+    color: "#CCF5AC"
     single_line: "//"
     begin_multiline: "/*"
     end_multiline: "*/"
 
-  grammar:
+  group:
     - color: "#72EEBB"
       operators:
         - "==="
@@ -118,9 +131,10 @@ Brain:
     - ".br"
     - ".brain"
 
-  default_color: "#969896"
+  default:
+    color: "#969896"
 
-  grammar:
+  group:
     - color: "#a71d5d"
       operators:
         - ">"
@@ -170,18 +184,26 @@ Brain:
 Test:
   extensions:
     - ".test"
-  default_color: "#FF8272"
-  comment_color: "#969896"
-  id_color: "#FF99FF"
-  number_color: "#FF6600"
-  string_color: "#333300"
+
+  default:
+    color: "#FF8272"
+
+  identifier:
+    color: "#FF99FF"
+
+  number:
+    color: "#FF6600"
+
+  string:
+    color: "#333300"
   
   comment:
+    color: "#969896"
     single_line: "//"
     begin_multiline: "/*"
     end_multiline: "*/"
 
-  grammar:
+  group:
     - color: "#72EEBB"
       keywords:
         - "for"
@@ -229,38 +251,58 @@ extensions:
   - ".ext2"
 ```
 
-##### default_color
-The default color for your language. All tokens with `undefined` color will have this color. If this color is not defined, it will use `GitHub`'s default color: `#24292e`
+##### default
+The default configurations for your language.
+
+###### default.color
+All tokens with `undefined` color will have this color. If this color is not defined, it will use `GitHub`'s default color: `#24292e`.
 ```YAML
-default_color: "#F00BAF"
+default:
+  color: "#F00BAF"
 ```
 
-##### id_color
-The color for your language's `identifiers`. If this color is `undefined`, it will user the property `default_color` instead.
+##### identifier
+The rules for `identifiers` in your language.
+_// Obs.: Right now we only have the property color, but we may add other properties later such as custom identifiers._
+
+###### identifier.color
+The color for your language's `identifiers`. If this color is `undefined`, it will user the property `default.color` instead.
 ```YAML
-id_color: "#F00BAF"
+identifier:
+  color: "#F00BAF"
 ```
 
-##### number_color
-The color for your language's `numbers`. If this color is `undefined`, it will user the property `default_color` instead.
+##### number
+The rules for `numbers` in your language.
+_// Obs.: Right now we only have the property color, but we may add other properties later such as custom numbers._
+
+###### number.color
+The color for your language's `numbers`. If this color is `undefined`, it will user the property `default.color` instead.
 ```YAML
-number_color: "#F00BAF"
+number:
+  color: "#F00BAF"
 ```
 
-##### string_color
-The color for your language's `strings`. If this color is `undefined`, it will user the property `default_color` instead.
-```YAML
-string_color: "#F00BAF"
-```
+##### string
+The rules for `strings` in your language.
+_// Obs.: Right now we only have the property color, but we may add other properties later such as custom strings._
 
-##### comment_color
-The color for your language's `comments`. If this color is `undefined`, it will user the property `default_color` instead.
+###### string.color
+The color for your language's `strings`. If this color is `undefined`, it will user the property `default.color` instead.
 ```YAML
-comment_color: "#F00BAF"
+string:
+  color: "#F00BAF"
 ```
-
 #### comment
 Group of __lexemes__ related to your comment tokens.
+
+##### comment.color
+The color for your language's `comments`. If this color is `undefined`, it will user the property `default.color` instead.
+```YAML
+comment:
+  color: "#F00BAF"
+  ...
+```
 
 ##### single\_line
 The __lexeme__ for your single line comments, such as `//`, `#` and others
@@ -285,10 +327,10 @@ comment:
   end_multiline: "*/"
 ```
 
-##### grammar
+##### group
 Represents a list of color rules for your `keywords`, `operators` and others. Example
 ```YAML
-grammar:
+group:
   - color: "#F00BAF"
     keywords:
       - "if"
@@ -310,17 +352,17 @@ grammar:
         modifier: "i"
 ```
 
-###### color
-Defines the `color group` for your `keywords`, `operators` and others (such as `regexes`). If `undefined`, it will user the property default_color instead.
+###### group.color
+Defines the `color group` for your `keywords`, `operators` and others (such as `regexes`). If `undefined`, it will user the property default.color instead.
 ```YAML
-grammar:
+group:
   - color: "#F00BAF"
 ```
 
-###### keywords
-Defines a list of `keywords` for a grammar color group.
+###### group.keywords
+Defines a list of `keywords` for a color group.
 ```YAML
-grammar:
+group:
   - color: "#F00BAF"
     keywords:
       - "if"
@@ -328,9 +370,9 @@ grammar:
 ```
 
 ###### operators
-Defines a list of `operators` for a grammar color group.
+Defines a list of `operators` for color group.
 ```YAML
-grammar:
+group:
   - color: "#F00BAF"
     operators:
       - "=="
@@ -339,9 +381,9 @@ grammar:
 ```
 
 ###### regexes
-Defines a list of `regexes` for a grammar color group. The `regexes` properties can be used as a property that may identify custom `lexemes` not included by `Linguist Unknown`. For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
+Defines a list of `regexes` for a color group. The `regexes` properties can be used as a property that may identify custom `lexemes` not included by `Linguist Unknown`. For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
 ```YAML
-grammar:
+group:
   - color: "#FF0000"
     regexes:
       - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
