@@ -15,35 +15,35 @@ describe('DownloadHelper', function () {
 
       objs.Brain.should.have.property('extensions');
       objs.Brain.extensions.should.containDeep([".brain", ".br"]);
-      objs.Brain.should.have.property('default_color');
-      objs.Brain.should.have.property('grammar');
-      objs.Brain.grammar.should.matchEach(function(obj) {
+      objs.Brain.should.have.property('default');
+      objs.Brain.should.have.property('group');
+      objs.Brain.group.should.matchEach(function(obj) {
         obj.should.have.property('color');
         obj.should.have.property('operators');
       });
 
       objs.Brainfuck.should.have.property('extensions');
       objs.Brainfuck.extensions.should.containDeep([".bf"]);
-      // We are testing Brainfuck without the default_color, thus, the test below was wrong
-      // objs.Brainfuck.should.have.property('default_color');
-      objs.Brainfuck.should.have.property('grammar');
+      // We are testing Brainfuck without the default, thus, the test below was wrong
+      // objs.Brainfuck.should.have.property('default');
+      objs.Brainfuck.should.have.property('group');
 
       objs.C.should.have.property('extensions');
       objs.C.extensions.should.containDeep([".c"]);
-      objs.C.should.have.property('default_color');
-      objs.C.should.have.property('grammar');
+      objs.C.should.have.property('default');
+      objs.C.should.have.property('group');
 
       objs.Test.should.have.property('extensions');
       objs.Test.extensions.should.containDeep([".test"]);
-      objs.Test.should.have.property('default_color');
-      objs.Test.should.have.property('grammar');
+      objs.Test.should.have.property('default');
+      objs.Test.should.have.property('group');
 
-      objs.Test.grammar.should.matchAny(function(obj) {
+      objs.Test.group.should.matchAny(function(obj) {
         obj.should.have.property('color');
         obj.should.have.property('keywords');
       });
 
-      objs.Test.grammar.should.matchAny(function(obj) {
+      objs.Test.group.should.matchAny(function(obj) {
         obj.should.have.property('color');
         obj.should.have.property('regexes');
         obj.regexes.should.matchEach(function(regexObj) {
