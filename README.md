@@ -26,23 +26,23 @@ See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
     - [Multiple Languages](#multiple-languages-in-same-repo)
     - [extensions](#extensions)
     - [default](#default)
-      - [color](#default.color)
+      - [color](#defaultcolor)
     - [identifier](#identifier)
-      - [color](#identifier.color)
+      - [color](#identifiercolor)
     - [number](#number)
-      - [color](#number.color)
+      - [color](#numbercolor)
     - [string](#string)
-      - [color](#string.color)
+      - [color](#stringcolor)
     - [comment](#comment)
-      - [color](#comment.color)
-      - [single_line](#comment.single_line)
-      - [begin_multiline](#comment.begin_multiline)
-      - [end_multiline](#comment.end_multiline)
+      - [color](#commentcolor)
+      - [single_line](#commentsingle_line)
+      - [begin_multiline](#commentbegin_multiline)
+      - [end_multiline](#commentend_multiline)
     - [group](#group)
-      - [color](#group.color)
-      - [keywords](#group.keywords)
-      - [operators](#group.operators)
-      - [regexes](#group.regexes)
+      - [color](#groupcolor)
+      - [keywords](#groupkeywords)
+      - [operators](#groupoperators)
+      - [regexes](#groupregexes)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -55,7 +55,7 @@ We believe that all languages should be highlighted on GitHub; just the way it s
 
 ### How can I download and use it?
 __Two Simple Steps__:
-- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the [Firefox Plugin](#) (on hold).
+- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the Firefox Plugin (still in __TODO__, [accepting pull requests](#CONTRIBUTING.md)).
 - Make sure it is active.
 
 <img alt="On/Off" src="./img/on_off.gif" />
