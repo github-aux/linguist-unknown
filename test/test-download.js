@@ -17,7 +17,7 @@ describe('DownloadHelper', function () {
       objs.Brain.extensions.should.containDeep([".brain", ".br"]);
       objs.Brain.should.have.property('default');
       objs.Brain.should.have.property('group');
-      objs.Brain.grammar.should.matchEach(function(obj) {
+      objs.Brain.group.should.matchEach(function(obj) {
         obj.should.have.property('color');
         obj.should.have.property('operators');
       });
