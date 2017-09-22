@@ -30,7 +30,7 @@ var LinguistHighlighter = (function() {
       this.langObj = langObj;
       if (this.langObj && this.langObj.has(DEFAULT_COLOR_KEY) === undefined) {
         // GitHub default color
-        this.langObj.default.color = GITHUB_DEFAULT_COLOR;
+        this.langObj.default = { color : GITHUB_DEFAULT_COLOR };
       }
 
       this.isMultilineComment = false;
@@ -327,7 +327,7 @@ var LinguistHighlighter = (function() {
             });
 
             if (not_found && langObj.has('identifier.color') !== undefined) {
-              color_id = langObj.id_color;
+              color_id = langObj.identifier.color;
             }
 
             tokens.push(new Token(id, pos, id.length, color_id));
