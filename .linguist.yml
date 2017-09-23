@@ -8,25 +8,26 @@ AdvPL:
     - ".ch"
 
   identifier:
-    color: "#FD971F"
+    color: "#55B4D4"
 
   string:
-    color: "#E6DB74"
+    color: "#86B300"
 
   number:
-    color: "#AE81FF"
+    color: "#A37ACC"
+
+  comment:
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
 
   group:
-    - color: "#E6DB74"
+    - color: "#86B300"
       operators:
         - "#"
       keywords:
         - "include"
-    - color: "#F92672"
-      operators:
-        - "=="
-        - ":="
-        - ":"
+    - color: "#FA6E32"
       keywords:
         - "Static"
         - "Function"
@@ -35,6 +36,15 @@ AdvPL:
         - "If"
         - "Else"
         - "EndIf"
+    - color: "#6E7580"
+      operators:
+        - "=="
+        - ":="
+        - ":"
+        - "("
+        - ")"
+        - "["
+        - "]"
 
 C:
   extensions:
