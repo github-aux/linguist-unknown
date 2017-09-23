@@ -1,5 +1,41 @@
 ---
 # Testing overwriting C colors
+AdvPL:
+  extensions:
+    - ".prw"
+    - ".apw"
+    - ".aph"
+    - ".ch"
+
+  identifier:
+    color: "#FD971F"
+
+  string:
+    color: "#E6DB74"
+
+  number:
+    color: "#AE81FF"
+
+  group:
+    - color: "#E6DB74"
+      operators:
+        - "#"
+      keywords:
+        - "include"
+    - color: "#F92672"
+      operators:
+        - "=="
+        - ":="
+        - ":"
+      keywords:
+        - "Static"
+        - "Function"
+        - "Local"
+        - "Return"
+        - "If"
+        - "Else"
+        - "EndIf"
+
 C:
   extensions:
     - ".c"
