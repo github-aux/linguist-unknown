@@ -17,6 +17,7 @@ AdvPL:
     color: "#A37ACC"
 
   comment:
+    color: "#969896"
     single_line: "//"
     begin_multiline: "/*"
     end_multiline: "*/"
@@ -27,6 +28,7 @@ AdvPL:
         - "#"
       keywords:
         - "include"
+
     - color: "#FA6E32"
       keywords:
         - "Static"
@@ -36,8 +38,10 @@ AdvPL:
         - "If"
         - "Else"
         - "EndIf"
+
     - color: "#6E7580"
       operators:
+        - "@"
         - "=="
         - ":="
         - ":"
@@ -154,6 +158,37 @@ Brainfuck:
       operators:
         - "."
         - ","
+
+Siren:
+  extensions:
+    - ".siren"
+
+  default:
+    color: "#d33682"
+
+  string:
+    color: "#dc322f"
+
+  number:
+    color: "#2aa198"
+
+  identifier:
+    color: "#b58900"
+
+  comment:
+    color: "#969896"
+    single_line: "#"
+
+  group:
+    - color: "#268bd2"
+      keywords:
+        - "True"
+        - "False"
+
+    - color: "#002b36"
+      keywords:
+        - "def"
+        - "let"
 
 # Testing Regex and others
 Test:
