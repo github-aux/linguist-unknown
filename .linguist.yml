@@ -190,6 +190,15 @@ Siren:
         - "def"
         - "let"
 
+    - color: "#FF8272"
+      keywords:
+        - "self"
+      regexes:
+        - regex: "@(lazy)"
+          modifier: ""
+        - regex: "\\$siren\/\\d+"
+          modifier: ""
+
 # Testing Regex and others
 Test:
   extensions:
