@@ -166,6 +166,9 @@ Capybara:
   default:
     color: "#22181C"
 
+  string:
+    color: "#F45B69"
+
   number:
     color: "#F45B69"
 
