@@ -148,6 +148,10 @@ var LinguistHighlighter = (function() {
     };
 
     highlighter.prototype.matchRegex = function(regex, modifier, code, idx) {
+      if (regex === undefined) {
+        return null;
+      }
+
       if (!regex.startsWith("^")) {
         regex = "^" + regex;
       }

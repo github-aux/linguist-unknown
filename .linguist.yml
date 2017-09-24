@@ -164,7 +164,7 @@ Capybara:
     - ".capy"
 
   default:
-    color: "#22181C"
+    color: "#5A0001"
 
   number:
     color: "#F45B69"
@@ -183,10 +183,10 @@ Capybara:
         - ":="
         - "#"
 
-    - color: "#5A0001"
+    - color: "#F45B69"
       regexes:
         - regex: "{:.*:}"
-        - modifier: ""
+          modifier: ""
 
 Siren:
   extensions:
