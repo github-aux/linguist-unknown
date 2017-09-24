@@ -50,42 +50,6 @@ AdvPL:
         - "["
         - "]"
 
-C:
-  extensions:
-    - ".c"
-
-  default:
-    color: "#24292e"
-
-  identifier:
-    color: "#7b9c0e"
-
-  number:
-    color: "#745296"
-
-  string:
-    color: "#8B9EB7"
-
-  comment:
-    color: "#969896"
-    single_line: "//"
-    begin_multiline: "/*"
-    end_multiline: "*/"
-
-  group:
-    - color: "#a71d5d"
-      keywords:
-        - "include"
-        - "void"
-        - "int"
-        - "float"
-
-    - color: "#FF1053"
-      keywords:
-        - "printf"
-        - "putchar"
-        - "getchar"
-
 # Including a complete new language
 Brain:
   extensions:
@@ -158,6 +122,42 @@ Brainfuck:
       operators:
         - "."
         - ","
+
+C:
+  extensions:
+    - ".c"
+
+  default:
+    color: "#24292e"
+
+  identifier:
+    color: "#7b9c0e"
+
+  number:
+    color: "#745296"
+
+  string:
+    color: "#8B9EB7"
+
+  comment:
+    color: "#969896"
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
+
+  group:
+    - color: "#a71d5d"
+      keywords:
+        - "include"
+        - "void"
+        - "int"
+        - "float"
+
+    - color: "#FF1053"
+      keywords:
+        - "printf"
+        - "putchar"
+        - "getchar"
 
 Siren:
   extensions:
