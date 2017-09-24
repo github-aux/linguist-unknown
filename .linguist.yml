@@ -1,5 +1,4 @@
 ---
-# Testing overwriting C colors
 AdvPL:
   extensions:
     - ".prw"
@@ -123,6 +122,7 @@ Brainfuck:
         - "."
         - ","
 
+# Testing overwriting C colors
 C:
   extensions:
     - ".c"
@@ -158,6 +158,35 @@ C:
         - "printf"
         - "putchar"
         - "getchar"
+
+Capybara:
+  extensions:
+    - ".capy"
+
+  default:
+    color: "#22181C"
+
+  number:
+    color: "#F45B69"
+
+  group:
+    - color: "#F13030"
+      keywords:
+        - "Module"
+        - "Import"
+        - "Export"
+        - "Declare"
+
+    - color: "#F45B69"
+      operators:
+        - "::"
+        - ":="
+        - "#"
+
+    - color: "#5A0001"
+      regexes:
+        - regex: "{:.*:}"
+        - modifier: ""
 
 Siren:
   extensions:
