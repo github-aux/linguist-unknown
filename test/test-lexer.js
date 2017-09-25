@@ -153,17 +153,24 @@ describe("Lexer", function() {
     done();
   });
 
-  it("should extract multiline comments", function(done) {
-    highlighter.getMultilineComment("*/", "******/*aaaaaaaaa*/", 6, function(comment, pos, looking, obj) {
+  it("should extract multiline lexemes and comments", function(done) {
+    var comment_lexeme = { begin_token: "/*", end_token: "*/" };
+    var multiline_lexeme = { begin_token: "\"\"\"", end_token: "\"\"\"" };
+
+    highlighter.getMultiline(comment_lexeme, "******/*aaaaaaaaa*/", 6, function(comment, pos, looking, obj) {
       comment.should.equal("/*aaaaaaaaa*/");
     });
 
-    highlighter.getMultilineComment("*/", "******aaaaaaaaa", 0, function(comment, pos, looking, obj) {
+    highlighter.getMultiline(comment_lexeme, "******aaaaaaaaa", 0, function(comment, pos, looking, obj) {
       comment.should.equal("******aaaaaaaaa");
     });
 
-    highlighter.getMultilineComment("*/", "*/*****aaaaaaaaa", 0, function(comment, pos, looking, obj) {
-      comment.should.equal("*/");
+    highlighter.getMultiline(comment_lexeme, "/**/*****aaaaaaaaa", 0, function(comment, pos, looking, obj) {
+      comment.should.equal("/**/");
+    });
+
+    highlighter.getMultiline(multiline_lexeme, "******\"\"\"aaaaaaaaa*/", 6, function(lexeme, pos, looking, obj) {
+      lexeme.should.equal("\"\"\"aaaaaaaaa*/");
     });
 
     done();

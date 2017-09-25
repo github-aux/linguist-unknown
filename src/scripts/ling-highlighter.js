@@ -33,7 +33,13 @@ var LinguistHighlighter = (function() {
         this.langObj.default = { color : GITHUB_DEFAULT_COLOR };
       }
 
-      this.isMultilineComment = false;
+      // it will be used for comments or any other multiline lexeme
+      this.multilineObj = {
+        active: false,
+        begin_token: "",
+        end_token: "",
+        color: ""
+      };
     };
 
     highlighter.prototype.draw = function(table) {
@@ -142,6 +148,75 @@ var LinguistHighlighter = (function() {
       return char === "\"" || char === "'";
     };
 
+    highlighter.prototype.isMultiline = function(code, idx) {
+      var begin_multiline_comment = this.langObj.valueForKeyPath('comment.begin_multiline');
+      var end_multiline_comment = this.langObj.valueForKeyPath('comment.end_multiline');
+
+      var color_multiline = this.langObj.default.color;
+
+      if (begin_multiline_comment !== undefined &&
+          this.startsWith(begin_multiline_comment, code, idx)) {
+        if (this.langObj.valueForKeyPath('comment.color') !== undefined) {
+          color_multiline = this.langObj.comment.color;
+        }
+
+        if (end_multiline_comment === undefined) {
+          end_multiline_comment = "";
+        }
+
+        this.multilineObj = {
+          active: true,
+          color: color_multiline,
+          begin_token: begin_multiline_comment,
+          end_token: end_multiline_comment
+        };
+
+        return true;
+      }
+
+      var still_looking_for = true;
+      var highlighter = this;
+      // check if it is operator or match any multiline definition
+      this.langObj.group.every(function(obj){
+        if (obj.multiline !== undefined) {
+          if (obj.color !== undefined) {
+            color_multiline = obj.color;
+          }
+
+          obj.multiline.every(function(multiline_obj){
+            var begin_multiline = multiline_obj.valueForKeyPath('begin');
+            var end_multiline = multiline_obj.valueForKeyPath('end');
+
+            if (begin_multiline === undefined) {
+              return true;
+            }
+
+            if (highlighter.startsWith(begin_multiline, code, idx)) {
+              if (end_multiline === undefined) {
+                end_multiline = "";
+              }
+
+              highlighter.multilineObj = {
+                active: true,
+                color: color_multiline,
+                begin_token: begin_multiline,
+                end_token: end_multiline
+              };
+
+              still_looking_for = false;
+              return false;
+            }
+
+            return still_looking_for;
+          });
+        }
+
+        return still_looking_for;
+      });
+
+      return !still_looking_for;
+    };
+
     highlighter.prototype.startsWith = function(lexeme, code, idx) {
       return lexeme !== undefined &&
         code.substring(idx, code.length).startsWith(lexeme);
@@ -245,28 +320,27 @@ var LinguistHighlighter = (function() {
       callback(str, pos_str, this.langObj);
     };
 
-    highlighter.prototype.getMultilineComment = function(endLexeme, code, idx, callback) {
-        var pos_comment = idx;
+    highlighter.prototype.getMultiline = function(obj, code, idx, callback) {
+        var pos = idx;
+        idx += obj.begin_token.length;
         var still_looking_for = true;
-        var comment = "";
+        var lexeme = code.substring(pos, idx);
         while(idx < code.length &&
-              !code.substring(idx, code.length).startsWith(endLexeme)) {
-            comment += code[idx];
+              !code.substring(idx, code.length).startsWith(obj.end_token)) {
+            lexeme += code[idx];
             idx++;
         }
 
         if (idx < code.length) {
-          comment += endLexeme;
+          lexeme += obj.end_token;
           still_looking_for = false;
         }
 
-        callback(comment, pos_comment, still_looking_for, this);
+        callback(lexeme, pos, still_looking_for, this);
     };
 
     highlighter.prototype.lexer = function(code) {
-      var begin_multiline_comment = this.langObj.valueForKeyPath('comment.begin_multiline');
-      var end_multiline_comment   = this.langObj.valueForKeyPath('comment.end_multiline');
-      var single_line_comment     = this.langObj.valueForKeyPath('comment.single_line');
+      var single_line_comment = this.langObj.valueForKeyPath('comment.single_line');
 
       var tokens = Array();
       var i = 0;
@@ -275,29 +349,21 @@ var LinguistHighlighter = (function() {
           i++;
           continue;
         }
-        else if (
-          this.isMultilineComment ||
-          this.startsWith(
-            begin_multiline_comment,
-            code, i
-          )
-        ) {
-          // TODO: refactory it
-          this.isMultilineComment = true;
-          this.getMultilineComment(
-            end_multiline_comment,
+        else if (this.multilineObj.active || this.isMultiline(code, i)) {
+          this.multilineObj.active = true;
+          this.getMultiline(
+            this.multilineObj,
             code,
             i,
-            function(mult_comment, pos, lookingFor, highlighter) {
-              highlighter.isMultilineComment = lookingFor;
-              var color_comment = highlighter.langObj.default.color;
-              if (highlighter.langObj.valueForKeyPath('comment.color') !== undefined) {
-                color_comment = highlighter.langObj.comment.color;
-              }
+            function(mult, pos, lookingFor, highlighter) {
+              highlighter.multilineObj.active = lookingFor;
+              // reset begin token
+              highlighter.multilineObj.begin_token = "";
+              var color = highlighter.multilineObj.color;
 
-              tokens.push(new Token(mult_comment,
-                pos, mult_comment.length, color_comment));
-              i += mult_comment.length;
+              tokens.push(new Token(mult,
+                pos, mult.length, color));
+              i += mult.length;
             }
           );
         } else if (this.startsWith(single_line_comment, code, i)) {
