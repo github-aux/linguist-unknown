@@ -122,6 +122,34 @@ Brainfuck:
         - "."
         - ","
 
+BrazukaScript:
+  extensions:
+    - ".bra"
+
+  default:
+    color: "#ffdf00"
+
+  string:
+    color: "#002776"
+
+  number:
+    color: "#002776"
+
+  comment:
+    color: "#969896"
+    begin_multiline: "/*"
+    end_multiline: "*/"
+
+  group:
+    - color: "#009c3b"
+      keywords:
+        - "funcao"
+        - "real"
+        - "inteiro"
+        - "retorna"
+        - "se"
+        - "senao"
+
 # Testing overwriting C colors
 C:
   extensions:
