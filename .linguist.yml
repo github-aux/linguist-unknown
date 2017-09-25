@@ -364,6 +364,13 @@ Quack:
         - "end"
         - "when"
         - "unless"
+        - "if"
+        - "or"
+        - "else"
+        - "then"
+        - "for"
+        - "from"
+        - "to"
 
 Siren:
   extensions:

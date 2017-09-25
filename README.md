@@ -10,7 +10,7 @@
 </p>
 
 # Linguist Unknown
-> This repository is used as a Web Browser extension for the website GitHub.com in order to detect and highlight unknown, lost or new programming languages.
+> This repository is used as a Web Browser extension for the website GitHub.com in order to detect and highlight unknown, lost or new programming languages. Oh! And you are as well able to overwrite syntax highlighting of known languages such as C, Javascript and many others!
 
 See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
 
@@ -18,10 +18,10 @@ See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
 
 - [Why](#why-should-you-download-it)
 - [Download](#how-can-i-download-and-use-it)
-- [Check if Linguist Unknown works](#how-do-i-know-if-it-works)
-  - [Check if your yaml is valid](#how-do-i-know-my-yaml-is-valid)
 - [Highlighting a new language](#how-to-highlight-my-languages)
 - [Examples](#examples)
+- [Check if Linguist Unknown works](#how-do-i-know-if-it-works)
+  - [Check if your yaml is valid](#how-do-i-know-my-yaml-is-valid)
 - [Documentation](#documentation)
     - [Multiple Languages](#multiple-languages-in-same-repo)
     - [extensions](#extensions)
@@ -59,18 +59,6 @@ __Two Simple Steps__:
 - Make sure it is active.
 
 <img alt="On/Off" src="./img/on_off.gif" />
-
-### How do I know if it works?
-After [downloading and installing it](#how-can-i-download-and-use-it), visit one (or all) of the link(s):
-- [./examples/C/io.c](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/C/io.c)
-- [./examples/Brain/human_jump.brain](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain)
-- [./examples/Brainfuck/hellbox.bf](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brainfuck/hellbox.bf)
-- [./examples/Test/test.test](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Test/test.test)
-
-__If__ they're `highlighted`, you're good to go!
-
-#### How do I know my YAML is valid?
-Please read the [documentation](#documentation) and check if your YAML is valid  [here](https://nodeca.github.io/js-yaml/)
 
 ### How to highlight my language(s)?
 1. [Download](#how-can-i-download-and-use-it) and install `Linguist Unknown`.
@@ -119,7 +107,9 @@ Foo:
         - "switch"
         - "let"
 ```
-4. Test it. Go to `/path/to/file.foo` or `/path/to/file.bar` and check if is highlighted! Simple as that!
+4. Test it. Go to `https://github.com/your/repository/path/to/file.foo` or `https://github.com/your/repository/path/to/file.bar` and check if is highlighted! Simple as that!
+
+_// Obs.: Make sure you refresh your browser's cached data._
 
 ### Examples
 
@@ -226,6 +216,28 @@ Test:
 <img alt="Test" src="./img/changing_test.gif" width="450px"/>
 </p>
 
+### How do I know if it works?
+After [downloading and installing it](#how-can-i-download-and-use-it), visit one (or all) of the cool languages we have gathered in this repository:
+
+| Language      | GitHub (or info) Repository | URL to test | Test file written by |
+| :-----------: | :-------------------------: | :---------- | :-------------- |
+| AdvPL         | [AdvPL repo](https://github.com/nginformatica/prelude-advpl) | [./examples/AdvPL/JSONTest.prw](https://github.com/github-aux/linguist-unknown/blob/development/examples/AdvPL/JSONTest.prw) | [haskellcamargo](https://github.com/haskellcamargo) |
+| Brain         | [Brain repo](https://github.com/brain-labs/brain) | [./examples/Brain/human_jump.brain](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brain/human_jump.brain) | [luizperes](https://github.com/luizperes) |
+| Brainfuck     | [Brainfuck (Wikipedia)](https://en.wikipedia.org/wiki/Brainfuck) | [./examples/Brainfuck/hellbox.bf](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Brainfuck/hellbox.bf) | [luizperes](https://github.com/luizperes) |
+| BrazukaScript | [BrazukaScript repo](https://github.com/brazuka-script/brazuka-script) | [./examples/BrazukaScript/wesley_safadao.bra](https://github.com/github-aux/linguist-unknown/blob/development/examples/BrazukaScript/wesley_safadao.bra) | [luizperes](https://github.com/luizperes) |
+| C | [C (Wikipedia)](https://en.wikipedia.org/wiki/C_(programming_language)) | [./examples/C/io.c](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/C/io.c) | [luizperes](https://github.com/luizperes) |
+| Capybara | [Capybara repo](https://github.com/capybara-language/compiler) | [./examples/Capybara/helloworld.capy](https://github.com/github-aux/linguist-unknown/blob/development/examples/Capybara/helloworld.capy) | [haskellcamargo](https://github.com/haskellcamargo) |
+| Headache | [Headache repo](https://github.com/LucasMW/Headache) | [./examples/Headache/func.ha](https://github.com/github-aux/linguist-unknown/blob/development/examples/Headache/func.ha) | [LucasMW](https://github.com/LucasMW) |
+| Monga    | [Monga repo](https://github.com/LucasMW/mongaComp) | [./examples/Monga/bf.monga](https://github.com/github-aux/linguist-unknown/blob/development/examples/Monga/bf.monga) | [LucasMW](https://github.com/LucasMW) |
+| Moon     | [Moon repo](https://github.com/MaiaVictor/moon-lang) | [./examples/Moon/_examples_.moon](https://github.com/github-aux/linguist-unknown/blob/development/examples/Moon/_examples_.moon) | [MaiaVictor](https://github.com/MaiaVictor) |
+| Quack    | [Quack repo](https://github.com/quack/quack) | [./examples/Quack/fn_stmt.qk](https://github.com/github-aux/linguist-unknown/blob/development/examples/Quack/fn_stmt.qk) | [luizperes](https://github.com/luizperes) |
+| Siren    | [Siren repo](https://github.com/siren-lang) | [./examples/Siren/100-doors.siren](https://github.com/github-aux/linguist-unknown/blob/development/examples/Siren/100-doors.siren) | [robotlolita](https://github.com/robotlolita) |
+| Test | -- | [./examples/Test/test.test](https://github.com/github-aux/linguist-unknown/blob/chrome/examples/Test/test.test) | [luizperes](https://github.com/luizperes) |
+
+__If__ they're `highlighted`, you're good to go!
+
+#### How do I know my YAML is valid?
+Please read the [documentation](#documentation) and check if your YAML is valid  [here](https://nodeca.github.io/js-yaml/)
 
 ### Documentation
 
@@ -395,3 +407,4 @@ Feel free to send your pull requests. Read our [CONTRIBUTING.md](CONTRIBUTING.md
 
 ### LICENSE
 This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
+
