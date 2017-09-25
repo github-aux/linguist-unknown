@@ -1,0 +1,154 @@
+
+/* BF INTERPRETER IN MONGA
+Copyright 25/10/16 
+Modified  17/12/16
+Lucas Menezes */
+
+int sleep(int t);
+int exit(int number);
+char getchar();
+void putchar(int c);
+
+char[] readFile(char[] filename);
+
+
+char[] newCharArrayZeroed(int n) {
+	int i;
+	char[] array;
+	array = new char[n];
+	i=0;
+	while(i<n) {
+		array[i] = 0;
+		i=i+1;
+	}
+	return array;
+}
+int[] newIntArrayZeroed(int n) {
+	int i;
+	int[] array;
+	array = new int[n];
+	i=0;
+	while(i<n) {
+		array[i] = 0;
+		i=i+1;
+	}
+	return array;
+}
+
+void error(char[] errorString, int signal) {
+	@ errorString ; @"\n";
+	exit(signal);
+}
+
+
+void execute(char[] program)
+{
+	/*does array contains its size? */
+	/* expects it to finish with null? */
+	char[] memory; 
+	int prgIdx;
+	int memIdx;
+	int[] loopStack;
+	int stackIdx;
+	int internalLoopCount;
+	memory = newCharArrayZeroed(30000);
+	prgIdx = 0;
+	memIdx = 0;
+	loopStack = newIntArrayZeroed(500); 
+	stackIdx = 0;
+
+	while(program[prgIdx]) /*assume it finishes in null like a C String*/
+	{
+		/*@program[prgIdx];*/
+		
+		if(program[prgIdx] == '>') {
+			memIdx = memIdx + 1;
+			if(memIdx >= 30000) 
+				error("Access Violation, no cell 30000",-1);
+		} 
+		else if(program[prgIdx] == '<') {
+			memIdx = memIdx - 1;
+			if(memIdx < 0) 
+				error("Access Violation, no cell zero",-1);
+		}
+		else if(program[prgIdx] == '+') {
+			memory[memIdx] = (memory[memIdx] as int) + 1;
+		} 
+		else if(program[prgIdx] == '-') {
+			memory[memIdx] = (memory[memIdx] as int) - 1;
+		} 
+		else if(program[prgIdx] == ',') {
+			memory[memIdx] = getchar();
+		} 
+		else if(program[prgIdx] == '.') {
+			@ memory[memIdx];
+		} 
+		else if(program[prgIdx] == '[') {
+			
+			/*@"Will begin loop? "; 
+			@memory[memIdx] as int; @"\n";*/
+			if(memory[memIdx]){
+				/*@"Entered Loop\n";*/
+				stackIdx = stackIdx + 1;
+				loopStack[stackIdx] = prgIdx;
+				/*@stackIdx; @"\n";*/
+			}
+			else {
+				/*jump to next ]*/
+				/*@"Won't enter loop\n";*/
+				prgIdx = prgIdx + 1;
+				internalLoopCount = 0;
+				while(!(program[prgIdx] == ']' && 
+					internalLoopCount == 0)) 
+					/*@"Inside While: "; 
+				@"memIdx "; @memIdx; 
+				@"\n"; */
+				/* while not match stop requirements*/
+				{
+					if(program[prgIdx] == '[')
+					{
+						internalLoopCount = internalLoopCount + 1;
+					}
+					else if(program[prgIdx] == ']')
+					{
+						internalLoopCount = internalLoopCount - 1;
+	
+					}
+					prgIdx = prgIdx + 1;
+				}
+
+			}
+		} 
+		else if(program[prgIdx] == ']') {
+			
+			/*@"Will exit loop? "; 
+			@memory[memIdx] as int; 
+			@"\n";*/
+			if(memory[memIdx]) {
+				/*@"continue looping\n";*/
+				prgIdx = loopStack[stackIdx];
+			}
+			else {
+				/*@"exit loop\n";*/
+				stackIdx = stackIdx - 1;
+				/*@stackIdx; @"\n";*/
+			}
+		} else {
+
+		}
+		prgIdx = prgIdx + 1;
+		/*@"prgIdx "; @prgIdx; @"\n";*/
+	}
+	
+}
+void main (int argc, char[][] argv) {
+	char[] programStr;
+	if(argc == 2) {
+		programStr = readFile(argv[1]);
+	}
+	else {
+		programStr =  ">+++++++++[<++++++++>-]<.>+++++++[<++++>-]<+.+++++++..+++.[-]>++++++++[<++++>-]<.#>+++++++++++[<+++++>-]<.>++++++++[<+++>-]<.+++.------.--------.[-]>++++++++[<++++>-]<+.[-]++++++++++.";
+	}	
+	execute(programStr);
+}
+

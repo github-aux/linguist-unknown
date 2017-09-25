@@ -3,7 +3,7 @@
 
   "name": "Linguist Unknown",
   "description": "Language Savant for unknown, lost or new programming languages on GitHub.",
-  "version": "1.0.7",
+  "version": "1.0.7.1",
   "browser_action": {
     "default_icon": "./img/linguist-unknown-icon.png",
     "default_popup": "./src/views/popup.html"

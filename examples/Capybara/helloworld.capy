@@ -1,0 +1,14 @@
+Module HelloWorld.
+Import StdPrint { field, font, label }.
+
+Declare text :: String
+  := {:Hello World!:}.
+
+Export Block main
+  label#begin,
+  field#origin [ 20, 10 ],
+  font#sizing  [ 90, 50 ],
+  field#data   [ text ],
+  field#sep,
+  label#end.
+
