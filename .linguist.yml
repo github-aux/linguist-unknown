@@ -412,6 +412,11 @@ Siren:
         - regex: "\\$siren\/\\d+"
           modifier: ""
 
+    - color: "#dc322f"
+      multiline:
+        - begin: "\"\"\""
+          end:   "\"\"\""
+
 # Testing Regex and others
 Test:
   extensions:

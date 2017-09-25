@@ -282,7 +282,7 @@ var LinguistHighlighter = (function() {
             code, i
           )
         ) {
-          // refactory it
+          // TODO: refactory it
           this.isMultilineComment = true;
           this.getMultilineComment(
             end_multiline_comment,
