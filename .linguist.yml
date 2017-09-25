@@ -247,6 +247,9 @@ Monga:
   default:
     color: "#DBB4AD"
 
+  identifier:
+    color: "#9B785B"
+
   number:
     color: "#A2AD91"
 
@@ -285,6 +288,40 @@ Monga:
         - "if"
         - "else"
         - "new"
+
+Moon:
+  extensions:
+    - ".moon"
+
+  default:
+    color: "#3C6D4E"
+
+  identifier:
+    color: "#59564F"
+
+  comment:
+    color: "#969896"
+    single_line: "//"
+
+  string:
+    color: "#8367C7"
+
+  number:
+    color: "#8367C7"
+
+  group:
+    - color: "#5603AD"
+      keywords:
+        - "do"
+        - "if"
+
+    - color: "#d73a49"
+      operators:
+        - ">"
+        - "=>"
+        - "=<"
+        - "|"
+        - "="
 
 Siren:
   extensions:
