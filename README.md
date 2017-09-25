@@ -43,6 +43,7 @@ See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
       - [keywords](#groupkeywords)
       - [operators](#groupoperators)
       - [regexes](#groupregexes)
+      - [multiline](#groupmultiline)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -106,6 +107,12 @@ Foo:
         - "else"
         - "switch"
         - "let"
+
+    - color: "#000000"
+      multiline:
+        - begin: "\"\"\""
+          end:   "\"\"\""
+
 ```
 4. Test it. Go to `https://github.com/your/repository/path/to/file.foo` or `https://github.com/your/repository/path/to/file.bar` and check if is highlighted! Simple as that!
 
@@ -321,7 +328,7 @@ The __lexeme__ for your single line comments, such as `//`, `#` and others
 ```YAML
 comment:
   single_line: "//"
-  ...
+  # ... other rules
 ```
 
 ##### begin\_multiline
@@ -329,7 +336,7 @@ The __lexeme__ for the begin of your multiline comments, such as `/*`, `{` and o
 ```YAML
 comment:
   begin_multiline: "/*"
-  ...
+  # ... other rules
 ```
 
 ##### end\_multiline
@@ -356,6 +363,9 @@ group:
       - "==="
       - "!=="
       - "=="
+    multiline:
+      - begin: "<begin>"
+      - end:   "</end>"
   - color: "FF0000"
     regexes:
       - regex: "&(amp;)\/[^\/]*\/([\\S]?)*"
@@ -369,6 +379,8 @@ Defines the `color group` for your `keywords`, `operators` and others (such as `
 ```YAML
 group:
   - color: "#F00BAF"
+
+  # ... other rules
 ```
 
 ###### group.keywords
@@ -379,9 +391,11 @@ group:
     keywords:
       - "if"
       - "else"
+
+  # ... other rules
 ```
 
-###### operators
+###### group.operators
 Defines a list of `operators` for color group.
 ```YAML
 group:
@@ -390,9 +404,11 @@ group:
       - "=="
       - "!="
       - ">"
+
+  # ... other rules
 ```
 
-###### regexes
+###### group.regexes
 Defines a list of `regexes` for a color group. The `regexes` properties can be used as a property that may identify custom `lexemes` not included by `Linguist Unknown`. For example, imagine that `#FFFFFF` is a valid lexeme in your language, to highlight it with red color, you would most likely do:
 ```YAML
 group:
@@ -400,6 +416,20 @@ group:
     regexes:
       - regex: "^#(?:[0-9a-fA-F]{3}){1,2}"
         modifiers: ""
+
+  # ... other rules
+```
+
+###### group.multiline
+Defines a list of multiline `lexemes` for a color group. It is very useful when you have a lexeme that takes multiple lines (not intended to be used for comments).
+```YAML
+group:
+  - color: "#FF00FF"
+    multiline:
+      - begin: "<table>"
+        end:   "</table>"
+
+   # ... other rules
 ```
 
 ### Contributing
