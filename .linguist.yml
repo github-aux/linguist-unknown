@@ -224,12 +224,13 @@ Headache:
     color: "#3185FC"
 
   string:
-    color: "#F9DC5C"
+    color: "#D6B62A"
 
   group:
-    - color: "#F9DC5C"
+    - color: "#D6B62A"
       operators:
         - "@"
+      keywords:
         - "as"
         - "main"
 
@@ -238,6 +239,52 @@ Headache:
         - "return"
         - "void"
         - "byte"
+
+Monga:
+  extensions:
+    - ".monga"
+
+  default:
+    color: "#DBB4AD"
+
+  number:
+    color: "#A2AD91"
+
+  string:
+    color: "#A2AD91"
+
+  comment:
+    color: "#BAA5A0"
+    single_line: "//"
+    begin_multiline: "/*"
+    end_multiline: "*/"
+
+  group:
+    - color: "#876974"
+      operators:
+        - ";"
+        - "["
+        - "]"
+        - "{"
+        - "}"
+        - "("
+        - ")"
+        - "=="
+        - "="
+        - "<"
+        - ">"
+        - "@"
+
+    - color: "#D30C7B"
+      keywords:
+        - "void"
+        - "char"
+        - "int"
+        - "return"
+        - "while"
+        - "if"
+        - "else"
+        - "new"
 
 Siren:
   extensions:
