@@ -323,6 +323,48 @@ Moon:
         - "|"
         - "="
 
+Quack:
+  extensions:
+    - ".qk"
+    - ".qkt"
+    - ".qtest"
+
+  default:
+    color: "#1F437C"
+
+  identifier:
+    color: "#0D7CA8"
+
+  number:
+    color: "#0D7CA8"
+
+  string:
+    color: "#0B5F63"
+
+  group:
+    - color: "#0D7CA8"
+      keywords:
+        - "true"
+        - "false"
+
+    - color: "#892525"
+      regexes:
+        - regex: "%%.*"
+          modifier: ""
+
+    - color: "#630A53"
+      operators:
+        - "^"
+        - "="
+        - ":-"
+      keywords:
+        - "let"
+        - "fn"
+        - "do"
+        - "end"
+        - "when"
+        - "unless"
+
 Siren:
   extensions:
     - ".siren"
