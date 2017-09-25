@@ -127,7 +127,7 @@ BrazukaScript:
     - ".bra"
 
   default:
-    color: "#ffdf00"
+    color: "#ccb100"
 
   string:
     color: "#002776"
@@ -215,6 +215,29 @@ Capybara:
       regexes:
         - regex: "{:.*:}"
           modifier: ""
+
+Headache:
+  extensions:
+    - ".ha"
+
+  default:
+    color: "#3185FC"
+
+  string:
+    color: "#F9DC5C"
+
+  group:
+    - color: "#F9DC5C"
+      operators:
+        - "@"
+        - "as"
+        - "main"
+
+    - color: "#E84855"
+      keywords:
+        - "return"
+        - "void"
+        - "byte"
 
 Siren:
   extensions:
