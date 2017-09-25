@@ -6,9 +6,9 @@ var LinguistHighlighter = (function() {
 
   // helper in checking nested properties with keypath
   var objPrototype = Object.prototype;
-  Object.defineProperty(objPrototype, "has", {
+  Object.defineProperty(objPrototype, "valueForKeyPath", {
     get : function(key) {
-      return function(key) { 
+      return function(key) {
         return key.split(".").reduce(function(o, x) {
           return (o === undefined || typeof o === undefined || o === null) ? o : o[x];
         }, this);
@@ -28,7 +28,7 @@ var LinguistHighlighter = (function() {
   var Highlighter = (function() {
     var highlighter = function(langObj) {
       this.langObj = langObj;
-      if (this.langObj && this.langObj.has(DEFAULT_COLOR_KEY) === undefined) {
+      if (this.langObj && this.langObj.valueForKeyPath(DEFAULT_COLOR_KEY) === undefined) {
         // GitHub default color
         this.langObj.default = { color : GITHUB_DEFAULT_COLOR };
       }
@@ -264,9 +264,9 @@ var LinguistHighlighter = (function() {
     };
 
     highlighter.prototype.lexer = function(code) {
-      var begin_multiline_comment = this.langObj.has('comment.begin_multiline');
-      var end_multiline_comment   = this.langObj.has('comment.end_multiline');
-      var single_line_comment     = this.langObj.has('comment.single_line');
+      var begin_multiline_comment = this.langObj.valueForKeyPath('comment.begin_multiline');
+      var end_multiline_comment   = this.langObj.valueForKeyPath('comment.end_multiline');
+      var single_line_comment     = this.langObj.valueForKeyPath('comment.single_line');
 
       var tokens = Array();
       var i = 0;
@@ -291,7 +291,7 @@ var LinguistHighlighter = (function() {
             function(mult_comment, pos, lookingFor, highlighter) {
               highlighter.isMultilineComment = lookingFor;
               var color_comment = highlighter.langObj.default.color;
-              if (highlighter.langObj.has('comment.color') !== undefined) {
+              if (highlighter.langObj.valueForKeyPath('comment.color') !== undefined) {
                 color_comment = highlighter.langObj.comment.color;
               }
 
@@ -303,7 +303,7 @@ var LinguistHighlighter = (function() {
         } else if (this.startsWith(single_line_comment, code, i)) {
           var comment = code.substring(i, code.length);
           var color_comment = this.langObj.default.color;
-          if (this.langObj.has('comment.color') !== undefined) {
+          if (this.langObj.valueForKeyPath('comment.color') !== undefined) {
             color_comment = this.langObj.comment.color;
           }
 
@@ -330,7 +330,7 @@ var LinguistHighlighter = (function() {
               return not_found;
             });
 
-            if (not_found && langObj.has('identifier.color') !== undefined) {
+            if (not_found && langObj.valueForKeyPath('identifier.color') !== undefined) {
               color_id = langObj.identifier.color;
             }
 
@@ -340,7 +340,7 @@ var LinguistHighlighter = (function() {
         } else if (this.isLiteralString(code[i])
           && this.getLiteralString(code, i, function(str, pos, langObj){
             var color_string = langObj.default.color;
-            if (langObj.has('string.color') !== undefined) {
+            if (langObj.valueForKeyPath('string.color') !== undefined) {
               color_string = langObj.string.color;
             }
 
@@ -351,7 +351,7 @@ var LinguistHighlighter = (function() {
         } else if (this.isNumber(code[i])) {
           this.getNumber(code, i, function(number, pos, langObj){
             var color_number = langObj.default.color;
-            if (langObj.has('number.color') !== undefined) {
+            if (langObj.valueForKeyPath('number.color') !== undefined) {
               color_number = langObj.number.color;
             }
 
