@@ -9,9 +9,12 @@
       if (items.shouldWork) {
         new LinguistLoader.Utilities().refresh(window.location);
         // listening the webbrowser url change...
-        doc.body.addEventListener('DOMSubtreeModified', function () {
+        var observer = new MutationObserver(function(mutations) {
           new LinguistLoader.Utilities().refresh(window.location, null);
-        }, false);
+        });
+
+        var config = { attributes: true, childList: true, characterData: true };
+        observer.observe(doc.body, config); 
       }
     });
   });
