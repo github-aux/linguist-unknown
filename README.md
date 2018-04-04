@@ -1,5 +1,5 @@
 <p align="center">
-	<img alt="Brain Logo" src="./img/linguist-unknown.png" width="100" />
+	<img alt="Linguist Unknown" src="./img/linguist-unknown.png" width="100" />
 </p>
 
 <p align="center">
@@ -10,9 +10,9 @@
 </p>
 
 # Linguist Unknown
-> This repository is used as a Web Browser extension for the website GitHub.com in order to detect and highlight unknown, lost or new programming languages. Oh! And you are as well able to overwrite syntax highlighting of known languages such as C, Javascript and many others!
+> This repository contains the source code of Linguist Unknown Web Browser extension, which extends and targets GitHub features by detecting and highlighting unknown, lost or new programming languages. With Linguist Unknown, you might as well overwrite syntax highlighting of known languages such as C, Javascript and many others.
 
-See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
+Please read the file [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
 
 # <img src="https://github.com/brain-labs/brainstation/blob/master/img/table_of_contents.png" alt="table of contents">
 
@@ -47,16 +47,16 @@ See  [`CONTRIBUTING.md`](CONTRIBUTING.md) before creating a pull request.
 - [Contributing](#contributing)
 - [License](#license)
 
-### Why should you download it?
-There are numerous cool languages out there whose syntaxes are not being highlighted on `GitHub`. That happens because the [Linguist Project](https://github.com/github/linguist) targets only the main existent programming languages.
+### Why should you download Linguist Unknown?
+There are numerous cool languages out there whose syntaxes are not being highlighted on `GitHub` as the [Linguist Project](https://github.com/github/linguist), the GitHub project for highlighting source codes in different languages, targets only the main existent programming languages.
 
-Because of that, most of the time it is frustrating to see a new-or-unknown-language source code. `Linguist Unknown` is a project that helps new, lost or unknown languages to be visualized on GitHub. It helps you to do what you already do on your favorite Text Editor.
+Because of that, it is frustrating to see a new-or-unknown-language source code. `Linguist Unknown` is a project that ensures thats new, lost or unknown (programming or not) languages are visualized on GitHub. It does what you already do on your favorite Text Editor.
 
-We believe that all languages should be highlighted on GitHub; just the way it should always be. :) There is an ocean of programming languages out there and by downloading `Linguist Unknown` you're making every drop of this ocean count!
+We believe that all languages should be highlighted on GitHub; the way it should always be. :) There is an ocean of programming languages out there and by downloading `Linguist Unknown` you are making every drop of this ocean count!
 
-### How can I download and use it?
+### How can I download and use Linguist Unknown?
 __Two Simple Steps__:
-- Install the [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the Firefox Plugin (still in __TODO__, [accepting pull requests](CONTRIBUTING.md)).
+- Install Linguist Unknown's [Google Chrome Plugin](https://chrome.google.com/webstore/detail/linguist-unknown/oohlobhfikieeeldgalkkkaojcaebclk) or the Firefox Plugin (still in __TODO__, [accepting pull requests](CONTRIBUTING.md)).
 - Make sure it is active.
 
 <img alt="On/Off" src="./img/on_off.gif" />
@@ -436,5 +436,4 @@ group:
 Feel free to send your pull requests. Read our [CONTRIBUTING.md](CONTRIBUTING.md) file :)
 
 ### LICENSE
-This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), so be aware of that, regarding copying, modifying and (re)destributing.
-
+This project extends [GNU GPL v. 3](http://www.gnu.org/licenses/gpl-3.0.en.html), thus be aware of that, regarding copying, modifying and (re)destributing.
