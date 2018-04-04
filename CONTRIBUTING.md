@@ -9,11 +9,11 @@
 
 ### Reporting a bug
 
-1. Look for any related issues [here](https://github.com/github-aux/linguist-unknown/issues).
-2. If you find an issue that seems related, please comment there instead of creating a new issue. If it is determined to be a unique bug, we will let you know that a new issue can be created.
-3. If you find no related issue, create a new issue by clicking [here](https://github.com/github-aux/linguist-unknown/issues/new).
-If we find an issue that's related, we will reference it and close your issue, showing you where to follow the bug.
-4. Tell us important details like what webbrowser you are using.
+1. Look for any issues related to your bug [here](https://github.com/github-aux/linguist-unknown/issues).
+2. If you find an issue that seems to be related, please comment there instead of creating a new issue. If at the end we determine to be a unique bug, we will let you know that a new issue can be created.
+3. If you find no issue related to your bug, create a new issue by filling the [issues form](https://github.com/github-aux/linguist-unknown/issues/new).
+If we find a related issue, we will reference it and close your issue, showing you where to follow the bug.
+4. Tell us important details such as the webbrowser you are using.
 5. Include any errors that may be displayed.
 6. Update us if you have any new info, or if the problem resolves itself!
 
